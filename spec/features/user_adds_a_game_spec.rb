@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature "User creates a game", %q{
+feature "User creates a game", %Q{
   As an authenticated user
   I want to create a game
   So that I can begin configuring it

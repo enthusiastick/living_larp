@@ -1,5 +1,6 @@
 LivingLarp::Application.routes.draw do
 
+  devise_for :users
   root 'games#index'
 
   resources :games, only: [:create, :index, :new, :show]

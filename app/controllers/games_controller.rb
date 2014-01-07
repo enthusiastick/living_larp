@@ -11,6 +11,9 @@ class GamesController < ApplicationController
     end
   end
 
+  def index
+  end
+
   def new
     @game = Game.new
   end
