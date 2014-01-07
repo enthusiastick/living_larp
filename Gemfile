@@ -44,6 +44,7 @@ group :test, :development do
   gem 'launchy'
   gem 'capybara'
   gem 'dotenv-rails'
+  gem 'email_spec'
 end
 
 group :development do
@@ -51,6 +52,7 @@ group :development do
   gem 'binding_of_caller'
   gem 'better_errors'
   gem 'quiet_assets'
+  gem 'mailcatcher'
 end
 
 group :staging, :production do
