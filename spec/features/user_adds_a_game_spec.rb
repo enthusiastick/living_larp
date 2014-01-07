@@ -11,7 +11,7 @@ feature "User creates a game", %Q{
   # * If I do not specify name and points, I am presented with an error
   # * If I specify name and point, the game is saved
 
-  context "with valid input" do
+  scenario "with valid input" do
     it "records a game" do
       count = Game.all.count
       user = FactoryGirl.create(:user)
@@ -28,7 +28,7 @@ feature "User creates a game", %Q{
 
   end
 
-  context "with invalid input" do
+  scenario "with invalid input" do
     it "throws an error" do
       count = Game.all.count
       user = FactoryGirl.create(:user)
@@ -42,7 +42,7 @@ feature "User creates a game", %Q{
 
   end
 
-  # context "not logged in" do
+  # scenario "not logged in" do
   #   it "won't authorize you" do
   #     visit new_game_path
   #     expect(page.status_code).to eq(404)
