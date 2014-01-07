@@ -1,6 +1,5 @@
 <%- if user_signed_in? -%>
   <%= link_to 'Add New Game', new_game_path %>
-  binding.pry
     <ol>
       <%- @user.games.each do |game| -%>
       <li><%= game.name %></li>

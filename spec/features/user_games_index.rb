@@ -28,6 +28,15 @@ feature "User views games index", %Q{
     expect(page).to have_content(game.name)
   end
 
-  scenario "with games created by many users"
+  scenario "with games created by many users" do
+    user = FactoryGirl.create(:user)
+    game1 = FactoryGirl.create(:game, user: user, name: 'Dystopia Rising')
+    game2 = FactoryGirl.create(:game)
+    login(user)
+    visit games_path
+
+    expect(page).to have_content(game1.name)
+    expect(page).to_not have_content(game2.name)
+  end
 
 end
