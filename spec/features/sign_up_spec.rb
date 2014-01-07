@@ -24,8 +24,25 @@ feature "User signs up", %Q{
     expect(page).to have_content("Sign Out")
   end
 
-  scenario 'specifying incomplete info'
+  scenario 'specifying incomplete info' do
+    visit root_path
+    click_link 'Sign Up'
 
-  scenario 'password not confirmed'
+    click_button 'Sign Up'
+    expect(page).to have_content("can't be blank")
+    expect(page).to_not have_content("Sign Out")
+  end
+
+  scenario 'password not confirmed' do
+    visit root_path
+    click_link 'Sign Up'
+    fill_in 'Email', with: 'user@example.com'
+    fill_in 'user_password', with: 'password'
+    fill_in 'Password Confirmation', with: 'idiot'
+
+    click_button 'Sign Up'
+    expect(page).to have_content("doesn't match")
+    expect(page).to_not have_content("Sign Out")
+  end
 
 end
