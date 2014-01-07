@@ -21,7 +21,7 @@ feature "User views games index", %Q{
 
   scenario "with games only created by user" do
     user = FactoryGirl.create(:user)
-    game = FactoryGirl.create(:game)
+    game = FactoryGirl.create(:game, user: user)
     login(user)
     visit games_path
 
