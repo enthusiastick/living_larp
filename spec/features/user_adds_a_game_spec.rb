@@ -14,6 +14,8 @@ feature "User creates a game", %Q{
   context "with valid input" do
     it "records a game" do
       count = Game.all.count
+      user = FactoryGirl.create(:user)
+      login(user)
       visit new_game_path
       fill_in "Name", with: "Witchwood"
       fill_in "Starting", with: "25"
@@ -21,6 +23,7 @@ feature "User creates a game", %Q{
 
       expect(page).to have_content("Witchwood")
       expect(Game.all.count).to eq(count + 1)
+      expect(Game.last.user_id).to eq(user.id)
     end
 
   end
@@ -28,6 +31,8 @@ feature "User creates a game", %Q{
   context "with invalid input" do
     it "throws an error" do
       count = Game.all.count
+      user = FactoryGirl.create(:user)
+      login(user)
       visit new_game_path
       click_on "Create Game"
 
@@ -36,5 +41,13 @@ feature "User creates a game", %Q{
     end
 
   end
+
+  # context "not logged in" do
+  #   it "won't authorize you" do
+  #     visit new_game_path
+  #     expect(page.status_code).to eq(404)
+  #   end
+
+  # end
 
 end

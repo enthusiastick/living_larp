@@ -5,6 +5,7 @@ describe Game do
   describe "Database Tests" do
     it { should have_db_column(:name).of_type(:string) }
     it { should have_db_column(:starting_points).of_type(:integer) }
+    it { should have_db_column(:user_id).of_type(:integer) }
   end
 
   describe "Validation Tests" do
@@ -14,8 +15,8 @@ describe Game do
     it { should_not have_valid(:starting_points).when(nil, "") }
   end
 
-  # describe "Association Tests" do
-  #   it { should belong_to(:user) }
-  # end
+  describe "Association Tests" do
+    it { should belong_to(:user) }
+  end
 
 end

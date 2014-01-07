@@ -1,7 +1,10 @@
 class GamesController < ApplicationController
 
+  before_action :authenticate_user, only: [:new, :create]
+
   def create
     @game = Game.new(game_params)
+    @game.user = current_user
     if @game.save
       flash[:notice] = "Game created successfully."
       redirect_to game_path(@game)
@@ -22,7 +25,7 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
   end
 
-  private
+  protected
 
   def game_params
     params.require(:game).permit(:name, :starting_points)
