@@ -15,7 +15,7 @@ feature "User signs in", %Q{
 
   scenario "with all correct info" do
     ActionMailer::Base.deliveries = []
-    visit new_contact_path
+    visit '/contact_us'
     fill_in 'First', with: 'Clara'
     fill_in 'Last', with: 'Oswald'
     fill_in 'Email', with: 'foo@example.com'
