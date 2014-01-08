@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title><%= content_for?(:title) ? yield(:title) : "foundation-rails" %></title>
+    <title><%= content_for?(:title) ? yield(:title) : "Living LARP" %></title>
 
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "vendor/modernizr" %>
@@ -33,7 +33,7 @@
           <li><%= link_to 'Contact Us', contact_us_path %></li>
         </ul>
       </div>
-      <div class="small-10 columns">
+      <div class="small-9 columns">
         <% flash.each do |name, msg| -%>
           <%= content_tag :div, msg, class: name %>
         <% end -%>

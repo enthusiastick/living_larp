@@ -26,7 +26,7 @@ feature "User signs in", %Q{
     expect(ActionMailer::Base.deliveries.size).to eq(1)
     last_email = ActionMailer::Base.deliveries.last
     expect(last_email).to have_subject(/time and space/)
-    expect(last_email).to deliver_to('contact@example.com')
+    expect(last_email).to deliver_to('eben.lowe+heroku@gmail.com')
     expect(last_email).to have_body_text(/help i am trapped in the time vortex/)
   end
 end
