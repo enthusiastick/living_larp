@@ -14,12 +14,12 @@
   <body>
 
     <div class="row">
-      <div class="small-10 small-offset-2 columns">
-        <h1>Living LARP</h1>
+      <div class="small-9 small-offset-3 columns">
+        <h1><%= link_to 'Living LARP', root_path %></h1>
       </div>
     </div>
     <div class="row">
-      <div class="small-2 columns">
+      <div class="small-3 columns">
         <ul>
           <%- if user_signed_in? -%>
             <li><%= link_to 'Sign Out', destroy_user_session_path %></li>
