@@ -8,7 +8,7 @@ class GameTraitsController < ApplicationController
       flash[:notice] = "Trait added successfully."
       redirect_to game_path(@game)
     else
-      flash[:error] = "Error! Please check your input and retry."
+      flash.now[:error] = "Error! Please check your input and retry."
       render 'games/show'
     end
 
