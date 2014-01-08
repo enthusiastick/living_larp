@@ -7,6 +7,8 @@ LivingLarp::Application.routes.draw do
     resources :game_traits, only: [:create, :index, :new, :show]
   end
 
+  resources :characters, only: [:create, :index, :new, :show]
+
   resources :contacts, only: [:new, :create]
 
   get '/contact_us', to: 'contacts#new'

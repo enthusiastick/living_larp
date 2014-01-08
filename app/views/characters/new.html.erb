@@ -1,0 +1,9 @@
+<%- if user_signed_in? -%>
+  <h1>Create A Character</h1>
+
+  <%= simple_form_for @character do |f| %>
+    <%= f.input :name %>
+    <%= f.association :game %>
+    <%= f.button :submit %>
+  <% end %>
+<%- end -%>

@@ -1,0 +1,30 @@
+class CharactersController < ApplicationController
+
+  def create
+    set_user
+    @character = Character.new(character_params)
+    @character.user = @user
+      if @character.save
+        flash[:notice] = "Character created successfully."
+        redirect_to character_path(@character)
+      else
+        flash.now[:error] = "Error! Please check your input and retry."
+        render :new
+      end
+  end
+
+  def new
+    @character = Character.new
+  end
+
+  def show
+    @character = Character.find(params[:id])
+  end
+
+  protected
+
+  def character_params
+    params.require(:character).permit(:name, :game_id, :user_id)
+  end
+
+end
