@@ -24,6 +24,7 @@
           <%- if user_signed_in? -%>
             <li><%= link_to 'Sign Out', destroy_user_session_path %></li>
               <ul>
+                <li><%= link_to 'Your Games', games_path %></li>
                 <li><%= link_to 'Add New Game', new_game_path %></li>
               </ul>
           <%- else -%>

@@ -42,12 +42,11 @@ feature "User creates a game", %Q{
 
   end
 
-  # context "not logged in" do
-  #   it "won't authorize you" do
-  #     visit new_game_path
-  #     expect(page.status_code).to eq(404)
-  #   end
+  context "not logged in" do
+    it "won't authorize you" do
+      expect { visit new_game_path }.to raise_error(ActionController::RoutingError, "Not Found")
+    end
 
-  # end
+  end
 
 end

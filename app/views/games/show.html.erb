@@ -1,1 +1,4 @@
-<h1><%= @game.name %></h1>
+<%- if user_signed_in? -%>
+  <h2><%= @game.name %></h2>
+  <p>Starting Points: <%= @game.starting_points %></p>
+<%- end -%>
