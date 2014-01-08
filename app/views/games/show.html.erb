@@ -1,4 +1,19 @@
 <%- if user_signed_in? -%>
   <h2><%= @game.name %></h2>
   <p>Starting Points: <%= @game.starting_points %></p>
+
+  <h3>Traits:</h3>
+  <ul>
+    <% @game_traits.each do |trait| %>
+      <li><%= trait.name %></li>
+    <% end %>
+  </ul>
+
+  <%= simple_form_for [@game, @game_trait] do |f| %>
+    <%= f.input :name, label: "Trait Name" %>
+    <%= f.input :max_purchases %>
+    <%= f.input :bgs, label: "BGS?" %>
+    <%= f.input :point_cost %>
+    <%= f.button :submit, "Add Trait" %>
+  <% end %>
 <%- end -%>

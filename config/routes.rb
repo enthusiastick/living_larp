@@ -3,7 +3,9 @@ LivingLarp::Application.routes.draw do
   devise_for :users
   root 'games#index'
 
-  resources :games, only: [:create, :index, :new, :show]
+  resources :games, only: [:create, :index, :new, :show] do
+    resources :game_traits, only: [:create, :index, :new, :show]
+  end
 
   resources :contacts, only: [:new, :create]
 
