@@ -13,4 +13,37 @@
 
  *= require_tree .
  */
-h1 {text-align:center}
+h1 {
+  text-align:center
+}
+
+nav {
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  a {
+    display: block;
+    padding: 6px 12px;
+    text-decoration: none;
+  }
+}
+
+.message {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333;
+}
+
+.notice {
+  @extend .message;
+  background-color: #99ff99;
+  border-color: #00ff33;
+}
+
+.error {
+  @extend .message;
+  background-color: #ff9999;
+  border-color: #ff0033;
+}
