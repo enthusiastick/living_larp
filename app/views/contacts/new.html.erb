@@ -1,0 +1,8 @@
+<h1>Contact Us</h1>
+
+<%= simple_form_for @contact do |f| %>
+  <%= f.input :name, required: true %>
+  <%= f.input :email, required: true %>
+  <%= f.input :message, required: true %>
+  <%= f.button :submit, 'Send Message' %>
+<% end %>

@@ -34,6 +34,7 @@ end
 
 gem 'simple_form'
 gem 'devise'
+gem 'mail_form'
 
 group :test, :development do
   gem 'rspec-rails'
