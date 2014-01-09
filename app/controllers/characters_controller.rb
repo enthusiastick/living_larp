@@ -7,10 +7,10 @@ class CharactersController < ApplicationController
     @character = Character.new(character_params)
     @character.user = @user
       if @character.save
-        flash[:notice] = "Character created successfully."
+        flash['alert-box success'] = "Character created successfully."
         redirect_to character_path(@character)
       else
-        flash.now[:error] = "Error! Please check your input and retry."
+        flash.now['alert-box alert'] = "Error! Please check your input and retry."
         render :new
       end
   end

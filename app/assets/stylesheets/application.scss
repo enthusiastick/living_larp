@@ -13,6 +13,9 @@
 
  *= require_tree .
  */
+
+@import "foundation/components/alert-boxes";
+
 h1 {
   text-align:center
 }
@@ -30,25 +33,15 @@ nav {
   }
 }
 
-.message {
-  border: 1px solid #ccc;
-  padding: 10px;
-  color: #333;
-}
-
-.notice {
-  @extend .message;
-  background-color: #99ff99;
-  border-color: #00ff33;
-}
-
-.error {
-  @extend .message;
-  background-color: #ff9999;
-  border-color: #ff0033;
-}
-
 .tiny {
   font-size: xx-small;
   color: #990000;
+}
+
+.notice {
+  @include alert;
+}
+
+.alert {
+  @include alert(#c60f13);
 }

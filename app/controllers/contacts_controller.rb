@@ -7,11 +7,11 @@ class ContactsController < ApplicationController
     @contact = Contact.new(params[:contact])
     @contact.request = request
     if @contact.deliver
-      flash[:error] = nil
-      flash[:notice] = 'Thank you for your feedback.'
+      flash['alert-box alert'] = nil
+      flash['alert-box'] = 'Thank you for your feedback.'
       redirect_to '/contact_us'
     else
-      flash.now[:error] = 'Unable to send message. Please retry.'
+      flash.now['alert-box alert'] = 'Unable to send message. Please retry.'
       render :new
     end
   end
