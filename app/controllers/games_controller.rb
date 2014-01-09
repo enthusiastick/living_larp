@@ -10,7 +10,7 @@ class GamesController < ApplicationController
       flash[:notice] = "Game created successfully."
       redirect_to game_path(@game)
     else
-      flash[:error] = "Error! Please check your input and retry."
+      flash.now[:error] = "Error! Please check your input and retry."
       render :new
     end
   end

@@ -11,7 +11,7 @@ class ContactsController < ApplicationController
       flash[:notice] = 'Thank you for your feedback.'
       redirect_to '/contact_us'
     else
-      flash[:error] = 'Unable to send message. Please retry.'
+      flash.now[:error] = 'Unable to send message. Please retry.'
       render :new
     end
   end
