@@ -9,7 +9,7 @@ describe Game do
   end
 
   describe "Validation Tests" do
-    FactoryGirl.create(:game)
+    let!(:game) { FactoryGirl.create(:game) }
     it { should have_valid(:name).when("Blah blah") }
     it { should_not have_valid(:name).when(nil, "") }
     it { should validate_uniqueness_of(:name) }

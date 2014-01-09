@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :game do
-    name "Knight Blades"
+    sequence(:name) {|n| "Knight Blades #{n}" }
     starting_points "100"
     user
   end
