@@ -6,7 +6,6 @@ class CharactersController < ApplicationController
     set_user
     @character = Character.new(character_params)
     @character.user = @user
-    @character.available_points = @character.game.starting_points if @character.valid?
       if @character.save
         flash['alert-box success'] = "Character created successfully."
         redirect_to character_path(@character)

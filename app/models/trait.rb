@@ -5,9 +5,25 @@ class Trait < ActiveRecord::Base
   belongs_to :character
 
   before_save :set_cost
+  before_validation :check_balance
 
   def set_cost
     self.points_spent = self.game_trait.point_cost * self.purchases
+  end
+
+  def check_balance
+    unless self.game_trait == nil
+      @character = self.character
+      cost = self.game_trait.point_cost * self.purchases
+      balance = @character.available_points
+      if balance - cost < 0
+        false
+      else
+        @character.available_points = balance - cost
+        @character.save
+        true
+      end
+    end
   end
 
 end
