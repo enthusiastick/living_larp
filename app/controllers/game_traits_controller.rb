@@ -1,5 +1,7 @@
 class GameTraitsController < ApplicationController
 
+  before_action :authenticate_user, only: [:new, :create]
+
   def create
     @game = Game.find(params[:game_id])
     @game_trait = GameTrait.new(game_trait_params)

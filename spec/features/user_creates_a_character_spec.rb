@@ -28,8 +28,21 @@ feature "User creates a game", %Q{
 
   end
 
-  # scenario "won't authorize you" do
-  #  expect { visit new_game_path }.to raise_error(ActionController::RoutingError, "Not Found")
-  # end
+  scenario "missing info" do
+    count = Character.all.count
+    user = FactoryGirl.create(:user)
+    login(user)
+    visit new_character_path
+    click_on "Create Character"
+
+    expect(page).to have_content("Error")
+    expect(Character.all.count).to eq(count)
+  end
+
+
+
+  scenario "won't authorize you" do
+   expect { visit new_character_path }.to raise_error(ActionController::RoutingError, "Not Found")
+  end
 
 end
