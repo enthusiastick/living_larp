@@ -1,5 +1,6 @@
 <%- if user_signed_in? -%>
   <h2><%= @character.name %></h2>
+  <p>Available Points: <%= @character.available_points %></p>
 
   <%= simple_form_for [@character, @trait] do |f| %>
     <%= f.association :game_trait %>
