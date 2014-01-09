@@ -21,6 +21,7 @@ class CharactersController < ApplicationController
 
   def show
     @character = Character.find(params[:id])
+    @trait = Trait.new
   end
 
   protected

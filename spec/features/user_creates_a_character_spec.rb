@@ -18,7 +18,7 @@ feature "User creates a game", %Q{
     login(user)
     visit new_character_path
     fill_in "Name", with: "Rafael"
-    select(game.name, :from => "Game")
+    select(game.name, from: "Game")
     click_on "Create Character"
 
     expect(page).to have_content("Rafael")
