@@ -1,4 +1,6 @@
 class Trait < ActiveRecord::Base
+  validates_presence_of :purchases, :game_trait_id, :character_id
+
   belongs_to :game_trait
   belongs_to :character
 
