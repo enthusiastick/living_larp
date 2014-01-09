@@ -6,6 +6,7 @@ class CharactersController < ApplicationController
     set_user
     @character = Character.new(character_params)
     @character.user = @user
+    @character.available_points = @character.game.starting_points if @character.valid?
       if @character.save
         flash['alert-box success'] = "Character created successfully."
         redirect_to character_path(@character)
@@ -27,7 +28,7 @@ class CharactersController < ApplicationController
   protected
 
   def character_params
-    params.require(:character).permit(:name, :game_id, :user_id)
+    params.require(:character).permit(:name, :game_id, :user_id, :available_points)
   end
 
 end
