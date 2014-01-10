@@ -10,13 +10,9 @@ class TraitsController < ApplicationController
       flash['alert-box success'] = "Character updated successfully."
       redirect_to character_path(@character)
     else
-      if @trait.purchases == nil || @trait.game_trait_id == nil
-        flash.now['alert-box alert'] = "Error! Please check your input and retry."
-      else
-        flash.now['alert-box alert'] = "Error! You do not have enough available points to add this trait."
-      end
-      render 'characters/show'
+      flash.now['alert-box alert'] = "Error! Please check your input and retry."
     end
+    render 'characters/show'
   end
 
   protected
