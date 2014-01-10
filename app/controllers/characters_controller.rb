@@ -1,10 +1,9 @@
 class CharactersController < ApplicationController
 
   before_action :authenticate_user, only: [:new, :create]
-  before_action :set_user, only: :index
+  before_action :set_user, only: [:create, :index, :show]
 
   def create
-    set_user
     @character = Character.new(character_params)
     @character.user = @user
       if @character.save
@@ -24,7 +23,11 @@ class CharactersController < ApplicationController
   end
 
   def show
-    @character = Character.find(params[:id])
+    if @user == nil
+      raise ActionController::RoutingError.new('Not Found')
+    else
+      @character = @user.characters.find(params[:id])
+    end
     @traits_collection = @character.game.game_traits
     @trait = Trait.new
   end
