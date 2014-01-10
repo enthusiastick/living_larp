@@ -2,17 +2,37 @@
   <h2><%= @game.name %></h2>
   <p>Starting Points: <%= @game.starting_points %></p>
 
-  <h3>Traits:</h3>
-  <ul>
-    <% @game.game_traits.each do |trait| %>
-      <li><%= trait.name %></li>
-    <% end %>
-  </ul>
+  <table width=100%>
+    <thead>
+      <tr>
+        <th>Trait</th>
+        <th>Max Purchases</th>
+        <th>Downtime</th>
+        <th>Cost</th>
+      </tr>
+    </thead>
+    <tbody>
+    <%- @game.game_traits.each do |trait| -%>
+    <tr>
+      <td><%= trait.name %></td>
+      <td><%= trait.max_purchases unless trait.max_purchases == nil%></td>
+      <td>
+        <%- if trait.bgs -%>
+          Yes
+        <%- else -%>
+          No
+        <%- end -%>
+      </td>
+      <td><%= trait.point_cost %></td>
+    </tr>
+    <%- end -%>
+    </tbody>
+  </table>
 
   <%= simple_form_for [@game, @game_trait] do |f| %>
     <%= f.input :name, label: "Trait Name", required: true %>
     <%= f.input :max_purchases %>
-    <%= f.input :bgs, label: "BGS?" %>
+    <%= f.input :bgs, label: "Downtime Trait?" %>
     <%= f.input :point_cost, required: true %>
     <%= f.button :submit, "Add Trait" %>
   <% end %>
