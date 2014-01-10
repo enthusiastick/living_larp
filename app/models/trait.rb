@@ -13,14 +13,13 @@ class Trait < ActiveRecord::Base
 
   def check_balance
     unless self.game_trait == nil
-      @character = self.character
+      character = self.character
       cost = self.game_trait.point_cost * self.purchases
-      balance = @character.available_points
+      balance = character.available_points
       if balance - cost < 0
         false
       else
-        @character.available_points = balance - cost
-        @character.save
+        character.decrement!(:available_points, by = cost)
         true
       end
     end

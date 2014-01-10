@@ -24,6 +24,7 @@ feature "User adds traits to a character", %Q{
     click_on "Update Character"
 
     expect(page).to have_content("successfully")
+    expect(page).to have_content("97")
     expect(Trait.all.count).to eq(count + 1)
     expect(Trait.last.game_trait_id).to eq(game_trait.id)
     expect(Trait.last.character_id).to eq(character.id)
@@ -39,7 +40,7 @@ feature "User adds traits to a character", %Q{
     visit character_path(character)
     click_on "Update Character"
 
-    expect(page).to have_content("Error")
+    expect(page).to have_content("check your input")
     expect(Trait.all.count).to eq(count)
   end
 
