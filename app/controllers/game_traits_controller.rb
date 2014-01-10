@@ -7,6 +7,7 @@ class GameTraitsController < ApplicationController
     @game_trait = GameTrait.new(game_trait_params)
     @game_trait.game = @game
     if @game_trait.save
+      flash['alert-box alert'] = nil
       flash['alert-box success'] = "Trait added successfully."
       redirect_to game_path(@game)
     else
@@ -23,7 +24,7 @@ class GameTraitsController < ApplicationController
   protected
 
   def game_trait_params
-    params.require(:game_trait).permit(:name, :max_purchases, :bgs, :point_cost, :game_id)
+    params.require(:game_trait).permit(:name, :max_purchases, :bgs, :point_cost, :game_id, :game_trait_id)
   end
 
 end

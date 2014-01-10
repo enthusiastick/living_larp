@@ -7,14 +7,25 @@ class Trait < ActiveRecord::Base
   belongs_to :character
 
   before_save :set_cost
-  before_validation :check_balance
-  before_validation :max_purchases
+  validate :check_balance
+  before_validation :allowed
 
   def set_cost
     self.points_spent = self.game_trait.point_cost * self.purchases
   end
 
   protected
+
+  def allowed
+    unless self.game_trait == nil || self.purchases == nil || self.game_trait.max_purchases == nil
+      if self.purchases > self.game_trait.max_purchases
+        errors.add(:purchases, "exceeds maximum purchases allowed")
+        false
+      else
+        true
+      end
+    end
+  end
 
   def check_balance
     unless self.game_trait == nil || self.purchases == nil
@@ -29,19 +40,6 @@ class Trait < ActiveRecord::Base
         true
       end
     end
-  end
-
-  def max_purchases
-    unless self.game_trait == nil || self.purchases == nil
-    character = self.character
-    if self.purchases > self.game_trait.max_purchases
-      errors.add(:purchases, "exceeds maximum purchases allowed")
-      false
-    else
-      true
-    end
-  end
-
   end
 
 end

@@ -11,8 +11,8 @@ class TraitsController < ApplicationController
       redirect_to character_path(@character)
     else
       flash.now['alert-box alert'] = "Error! Please check your input and retry."
+      render 'characters/show'
     end
-    render 'characters/show'
   end
 
   protected
