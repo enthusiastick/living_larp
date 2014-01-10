@@ -16,6 +16,7 @@ class CharactersController < ApplicationController
   end
 
   def index
+    @characters = Character.all
   end
 
   def new
