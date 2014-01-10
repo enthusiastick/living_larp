@@ -20,7 +20,7 @@ feature "User configures a game", %Q{
     visit game_path(game)
     fill_in "Name", with: "Repose of Peace"
     fill_in "Point", with: "3"
-    uncheck("BGS?")
+    uncheck("Downtime")
     click_on "Add Trait"
 
     expect(page).to have_content("Repose of Peace")
