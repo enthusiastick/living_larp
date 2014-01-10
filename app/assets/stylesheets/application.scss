@@ -45,3 +45,11 @@ nav {
 .alert {
   @include alert(#c60f13);
 }
+
+.hard {
+  font-weight: bold;
+}
+
+.sharp {
+  font-style: italic;
+}

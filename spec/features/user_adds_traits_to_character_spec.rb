@@ -15,13 +15,13 @@ feature "User adds traits to a character", %Q{
     count = Trait.all.count
     user = FactoryGirl.create(:user)
     login(user)
-    make(@game, @game_trait, @character)
+    make(game, game_trait, character)
 
     expect(page).to have_content("successfully")
     expect(page).to have_content("97")
     expect(Trait.all.count).to eq(count + 1)
-    expect(Trait.last.game_trait_id).to eq(@game_trait.id)
-    expect(Trait.last.character_id).to eq(@character.id)
+    expect(Trait.last.game_trait_id).to eq(game_trait.id)
+    expect(Trait.last.character_id).to eq(character.id)
   end
 
   scenario "no specified info" do
