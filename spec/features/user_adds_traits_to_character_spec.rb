@@ -14,27 +14,21 @@ feature "User adds traits to a character", %Q{
   scenario "happy path" do
     count = Trait.all.count
     user = FactoryGirl.create(:user)
-    game = FactoryGirl.create(:game)
-    game_trait = FactoryGirl.create(:game_trait)
-    character = FactoryGirl.create(:character)
     login(user)
-    visit character_path(character)
-    select(game_trait.name, from: "trait")
-    fill_in "Purchases", with: "1"
-    click_on "Update Character"
+    make(@game, @game_trait, @character)
 
     expect(page).to have_content("successfully")
     expect(page).to have_content("97")
     expect(Trait.all.count).to eq(count + 1)
-    expect(Trait.last.game_trait_id).to eq(game_trait.id)
-    expect(Trait.last.character_id).to eq(character.id)
+    expect(Trait.last.game_trait_id).to eq(@game_trait.id)
+    expect(Trait.last.character_id).to eq(@character.id)
   end
 
   scenario "no specified info" do
     count = Trait.all.count
     user = FactoryGirl.create(:user)
-    game = FactoryGirl.create(:game)
-    game_trait = FactoryGirl.create(:game_trait)
+    game = FactoryGirl.create(:game, name: "Beta")
+    game_trait = FactoryGirl.create(:game_trait, game: game)
     character = FactoryGirl.create(:character)
     login(user)
     visit character_path(character)
@@ -47,8 +41,8 @@ feature "User adds traits to a character", %Q{
   scenario "not enough available points" do
     count = Trait.all.count
     user = FactoryGirl.create(:user)
-    game = FactoryGirl.create(:game)
-    game_trait = FactoryGirl.create(:game_trait)
+    game = FactoryGirl.create(:game, name: "Charlie")
+    game_trait = FactoryGirl.create(:game_trait, game: game)
     character = FactoryGirl.create(:character)
     login(user)
     visit character_path(character)

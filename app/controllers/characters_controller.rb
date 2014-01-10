@@ -21,6 +21,7 @@ class CharactersController < ApplicationController
 
   def show
     @character = Character.find(params[:id])
+    @traits_collection = @character.game.game_traits
     @trait = Trait.new
   end
 

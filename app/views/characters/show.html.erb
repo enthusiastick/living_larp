@@ -3,7 +3,7 @@
   <p>Available Points: <%= @character.available_points %></p>
 
   <%= simple_form_for [@character, @trait] do |f| %>
-    <%= f.association :game_trait %>
+    <%= f.association :game_trait, collection: @traits_collection %>
     <%= f.input :purchases %>
     <%= f.button :submit, 'Update Character' %>
   <% end %>
