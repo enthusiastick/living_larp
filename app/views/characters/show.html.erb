@@ -2,6 +2,13 @@
   <h2><%= @character.name %></h2>
   <p>Available Points: <%= @character.available_points %></p>
 
+  <h3>Traits:</h3>
+  <ul>
+    <% @character.traits.each do |trait| %>
+      <li><%= trait.game_trait.name %> (<%= trait.purchases %>)</li>
+    <% end %>
+  </ul>
+
   <%= simple_form_for [@character, @trait] do |f| %>
     <%= f.association :game_trait, collection: @traits_collection %>
     <%= f.input :purchases %>

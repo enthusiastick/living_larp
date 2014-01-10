@@ -1,8 +1,11 @@
-<div>
-  <ol>
-  <%- @user.characters.each do |character| -%>
-    <li><%= character.name %></li>
-  <%- end -%>
-  </ol>
-</div>
+<%- if user_signed_in? -%>
+  <div>
+    <h5>My characters:</h5>
+    <ol>
+    <%- @user.characters.each do |character| -%>
+      <li><%= link_to character.name, character_path(character) %></li>
+    <%- end -%>
+    </ol>
+  </div>
+<%- end -%>
 
