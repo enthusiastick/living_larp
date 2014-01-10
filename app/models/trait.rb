@@ -12,7 +12,7 @@ class Trait < ActiveRecord::Base
   end
 
   def check_balance
-    unless self.game_trait == nil
+    unless self.game_trait == nil || self.purchases == nil
       character = self.character
       cost = self.game_trait.point_cost * self.purchases
       balance = character.available_points
