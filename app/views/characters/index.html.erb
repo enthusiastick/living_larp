@@ -1,8 +1,8 @@
 <div>
   <ol>
-  <%= @characters.each do |character| %>
+  <%- @user.characters.each do |character| -%>
     <li><%= character.name %></li>
-  <% end %>
+  <%- end -%>
   </ol>
 </div>
 

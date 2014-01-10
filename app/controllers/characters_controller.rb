@@ -1,6 +1,7 @@
 class CharactersController < ApplicationController
 
   before_action :authenticate_user, only: [:new, :create]
+  before_action :set_user, only: :index
 
   def create
     set_user
@@ -16,7 +17,6 @@ class CharactersController < ApplicationController
   end
 
   def index
-    @characters = Character.all
   end
 
   def new
