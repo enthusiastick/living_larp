@@ -30,6 +30,11 @@
     </table>
   <%- end -%>
 
-  <%= button_to 'Configure Traits', new_game_game_trait_path(@game), method: :get, class: 'button' %>
-
+  <%= simple_form_for [@game, @game_trait] do |f| %>
+    <%= f.input :name, label: "Trait Name", required: true %>
+    <%= f.input :max_purchases %>
+    <%= f.input :bgs, label: "Downtime Trait?" %>
+    <%= f.input :point_cost, required: true %>
+    <%= f.button :submit, "Add Trait" %>
+  <% end %>
 <%- end -%>

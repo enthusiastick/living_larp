@@ -28,7 +28,6 @@ class GamesController < ApplicationController
     else
       @game = @user.games.find(params[:id])
     end
-    @game_trait = GameTrait.new
   end
 
   protected

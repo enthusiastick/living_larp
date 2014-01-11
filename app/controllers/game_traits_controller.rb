@@ -7,17 +7,17 @@ class GameTraitsController < ApplicationController
     @game_trait = GameTrait.new(game_trait_params)
     @game_trait.game = @game
     if @game_trait.save
-      flash['alert-box alert'] = nil
       flash['alert-box success'] = "Trait added successfully."
-      redirect_to game_path(@game)
+      redirect_to new_game_game_trait_path(@game)
     else
       flash.now['alert-box alert'] = "Error! Please check your input and retry."
-      render 'games/show'
+      render 'game_traits/new'
     end
 
   end
 
   def new
+    @game = Game.find(params[:game_id])
     @game_trait = GameTrait.new
   end
 
