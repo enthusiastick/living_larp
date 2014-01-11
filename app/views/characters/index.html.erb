@@ -1,11 +1,15 @@
 <%- if user_signed_in? -%>
   <div>
-    <h5>My characters:</h5>
-    <ol>
-    <%- @user.characters.each do |character| -%>
-      <li><%= link_to character.name, character_path(character) %></li>
-    <%- end -%>
-    </ol>
+    <table width=100%>
+      <thead>
+        <tr><th>Character</th><th>Game</th></tr>
+      </thead>
+      <tbody>
+        <%- @user.characters.each do |character| -%>
+          <tr><td><%= link_to character.name, character_path(character) %></td><td><%= link_to character.game.name, game_path(character.game) %></td></tr>
+        <%- end -%>
+      </tbody>
+    </table>
   </div>
 <%- end -%>
 

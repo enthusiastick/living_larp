@@ -1,11 +1,13 @@
 <%- if user_signed_in? -%>
   <div>
     <h5>My games:</h5>
-    <ol>
-      <%- @user.games.each do |game| -%>
-      <li><%= link_to game.name, game_path(game) %></li>
-      <%- end %>
-    </ol>
+    <table width=100%>
+      <tbody>
+        <%- @user.games.each do |game| -%>
+          <tr><td><%= link_to game.name, game_path(game) %></td></tr>
+        <%- end -%>
+      </tbody>
+    </table>
   </div>
 <%- else %>
   <div class="panel callout radius">
