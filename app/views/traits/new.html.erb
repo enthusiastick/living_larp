@@ -20,7 +20,10 @@
     </table>
   <%- end -%>
 
-  <%= button_to 'Update Character', new_character_trait_path(@character), method: :get, class: 'button' %>
-
+  <%= simple_form_for [@character, @trait] do |f| %>
+    <%= f.association :game_trait, collection: @traits_collection %>
+    <%= f.input :purchases %>
+    <%= f.button :submit, 'Update Character' %>
+  <% end %>
 <%- end -%>
 

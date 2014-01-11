@@ -28,8 +28,6 @@ class CharactersController < ApplicationController
     else
       @character = @user.characters.find(params[:id])
     end
-    @traits_collection = @character.game.game_traits
-    @trait = Trait.new
   end
 
   protected
