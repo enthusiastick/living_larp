@@ -20,10 +20,11 @@
     </div>
     <div class="row">
       <div class="small-3 columns">
-        <nav>
+        <nav class="side-nav">
           <ul>
             <%- if user_signed_in? -%>
-              <p class="round secondary label"><%= current_user.email %></p>
+              <p><span class="round secondary label"><%= current_user.email %></span></p>
+              <li class="divider"></li>
               <li><%= link_to 'Sign Out', destroy_user_session_path %></li>
                 <ul>
                   <li><%= link_to 'Your Games', games_path %></li>
