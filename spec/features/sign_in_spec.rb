@@ -17,6 +17,8 @@ feature "User signs in", %Q{
     click_link 'Sign In'
     fill_in 'Email', with: user.email
     fill_in 'Password', with: user.password
+    user.confirmed_at = Time.now
+    user.save
 
     click_button 'Sign In'
     expect(page).to have_content('Welcome')
@@ -53,6 +55,8 @@ feature "User signs in", %Q{
     visit new_user_session_path
     fill_in 'Email', with: user.email
     fill_in 'Password', with: user.password
+    user.confirmed_at = Time.now
+    user.save
 
     click_button 'Sign In'
     expect(page).to have_content('Sign Out')

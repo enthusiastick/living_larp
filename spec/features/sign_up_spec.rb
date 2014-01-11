@@ -21,7 +21,7 @@ feature "User signs up", %Q{
 
     click_button 'Sign Up'
     expect(page).to have_content("Success")
-    expect(page).to have_content("Sign Out")
+    expect(page).to have_content("a confirmation link has been sent")
   end
 
   scenario 'specifying incomplete info' do
