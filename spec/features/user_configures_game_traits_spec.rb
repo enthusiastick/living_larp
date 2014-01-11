@@ -17,7 +17,7 @@ feature "User configures a game", %Q{
     user = FactoryGirl.create(:user)
     game = FactoryGirl.create(:game, user: user)
     login(user)
-    visit game_path(game)
+    visit new_game_game_trait_path(game)
     fill_in "Name", with: "Repose of Peace"
     fill_in "Point", with: "3"
     uncheck("Downtime")
@@ -33,7 +33,7 @@ feature "User configures a game", %Q{
     user = FactoryGirl.create(:user)
     game = FactoryGirl.create(:game, user: user)
     login(user)
-    visit game_path(game)
+    visit new_game_game_trait_path(game)
     click_on "Add Trait"
 
     expect(page).to have_content("Error")
