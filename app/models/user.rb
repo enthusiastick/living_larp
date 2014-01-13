@@ -7,4 +7,9 @@ class User < ActiveRecord::Base
 
   has_many :games
   has_many :characters
+  has_many :players
+
+  def name
+    self.email
+  end
 end

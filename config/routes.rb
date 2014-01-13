@@ -10,6 +10,7 @@ LivingLarp::Application.routes.draw do
 
   resources :games, only: [:create, :index, :new, :show] do
     resources :game_traits, only: [:create, :index, :new, :show]
+    resources :players, only: [:create, :index, :new, :show]
   end
 
   resources :characters, only: [:create, :index, :new, :show] do

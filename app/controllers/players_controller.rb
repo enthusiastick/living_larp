@@ -1,0 +1,36 @@
+class PlayersController < ApplicationController
+
+  def create
+    @player = Player.new(player_params)
+    if @player.save
+      flash['alert-box success'] = "Player added successfully."
+      redirect_to game_players_path(@player.game)
+    else
+      flash.now['alert-box alert'] = "Error! Unable to add player."
+      render 'player/new'
+    end
+  end
+
+  def index
+    @game = Game.find(params[:game_id])
+  end
+
+  def new
+    @game = Game.find(params[:game_id])
+    user_search = User.find_by email:(params[:email])
+    if user_search == nil
+      flash['alert-box alert'] = "User not found."
+      redirect_to game_players_path(@game)
+    else
+      @player = Player.new
+      @user = user_search
+    end
+  end
+
+  protected
+
+  def player_params
+    params.require(:player).permit(:user_id, :game_id)
+  end
+
+end

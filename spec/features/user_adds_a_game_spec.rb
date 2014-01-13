@@ -13,7 +13,7 @@ feature "User creates a game", %Q{
 
   context "with valid input" do
     it "records a game" do
-      count = Game.all.count
+      count = Game.count
       user = FactoryGirl.create(:user)
       login(user)
       visit new_game_path
@@ -22,7 +22,7 @@ feature "User creates a game", %Q{
       click_on "Create Game"
 
       expect(page).to have_content("Witchwood")
-      expect(Game.all.count).to eq(count + 1)
+      expect(Game.count).to eq(count + 1)
       expect(Game.last.user_id).to eq(user.id)
     end
 
@@ -30,14 +30,14 @@ feature "User creates a game", %Q{
 
   context "with invalid input" do
     it "throws an error" do
-      count = Game.all.count
+      count = Game.count
       user = FactoryGirl.create(:user)
       login(user)
       visit new_game_path
       click_on "Create Game"
 
       expect(page).to have_content("Error")
-      expect(Game.all.count).to eq(count)
+      expect(Game.count).to eq(count)
     end
 
   end

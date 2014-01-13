@@ -13,7 +13,7 @@ feature "User configures a game", %Q{
   # * If I specify required info, the trait is saved
 
   scenario "happy path" do
-    count = GameTrait.all.count
+    count = GameTrait.count
     user = FactoryGirl.create(:user)
     game = FactoryGirl.create(:game, user: user)
     login(user)
@@ -24,12 +24,12 @@ feature "User configures a game", %Q{
     click_on "Add Trait"
 
     expect(page).to have_content("Repose of Peace")
-    expect(GameTrait.all.count).to eq(count + 1)
+    expect(GameTrait.count).to eq(count + 1)
     expect(GameTrait.last.game_id).to eq(game.id)
   end
 
   scenario "no specified info" do
-    count = GameTrait.all.count
+    count = GameTrait.count
     user = FactoryGirl.create(:user)
     game = FactoryGirl.create(:game, user: user)
     login(user)
@@ -37,7 +37,7 @@ feature "User configures a game", %Q{
     click_on "Add Trait"
 
     expect(page).to have_content("Error")
-    expect(GameTrait.all.count).to eq(count)
+    expect(GameTrait.count).to eq(count)
   end
 
 end

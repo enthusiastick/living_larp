@@ -1,0 +1,15 @@
+  <%- unless @game.players == nil %>
+    <table width=100%>
+      <tbody>
+        <% @game.players.each do |player| %>
+          <tr><td><%= player.user.email %></td><tr>
+        <% end %>
+      </tbody>
+    </table>
+  <%- end -%>
+
+  <%= form_tag(new_game_player_path(@game), method: "get") do %>
+    <%= label_tag(:email, "Email:") %>
+    <%= text_field_tag(:email) %>
+    <%= submit_tag "Add Player", class: "button" %>
+  <% end %>

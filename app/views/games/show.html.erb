@@ -30,6 +30,9 @@
     </table>
   <%- end -%>
 
-  <%= button_to 'Configure Traits', new_game_game_trait_path(@game), method: :get, class: 'button' %>
+  <ul class="inline-list">
+    <li><%= button_to 'Configure Traits', new_game_game_trait_path(@game), method: :get, class: 'button' %></li>
+    <li><%= button_to 'Manage Players', game_players_path(@game), method: :get, class: 'button' %></li>
+  </ul>
 
 <%- end -%>

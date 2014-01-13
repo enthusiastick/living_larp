@@ -5,4 +5,5 @@ class Game < ActiveRecord::Base
   belongs_to :user
   has_many :game_traits
   has_many :characters
+  has_many :players
 end

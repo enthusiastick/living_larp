@@ -12,7 +12,7 @@ feature "User creates a game", %Q{
   # * If I specify name and game, the character is saved
 
   scenario "happy path" do
-    count = Character.all.count
+    count = Character.count
     user = FactoryGirl.create(:user)
     game = FactoryGirl.create(:game)
     login(user)
@@ -22,21 +22,21 @@ feature "User creates a game", %Q{
     click_on "Create Character"
 
     expect(page).to have_content("Rafael")
-    expect(Character.all.count).to eq(count + 1)
+    expect(Character.count).to eq(count + 1)
     expect(Character.last.game_id).to eq(game.id)
     expect(Character.last.user_id).to eq(user.id)
 
   end
 
   scenario "missing info" do
-    count = Character.all.count
+    count = Character.count
     user = FactoryGirl.create(:user)
     login(user)
     visit new_character_path
     click_on "Create Character"
 
     expect(page).to have_content("Error")
-    expect(Character.all.count).to eq(count)
+    expect(Character.count).to eq(count)
   end
 
   scenario "won't authorize you" do
