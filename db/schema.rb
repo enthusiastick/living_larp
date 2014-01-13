@@ -33,7 +33,6 @@ ActiveRecord::Schema.define(version: 20140111010423) do
     t.integer  "game_id",       null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "game_trait_id"
   end
 
   create_table "games", force: true do |t|

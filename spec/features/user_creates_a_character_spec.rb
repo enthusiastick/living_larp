@@ -39,8 +39,6 @@ feature "User creates a game", %Q{
     expect(Character.all.count).to eq(count)
   end
 
-
-
   scenario "won't authorize you" do
    expect { visit new_character_path }.to raise_error(ActionController::RoutingError, "Not Found")
   end

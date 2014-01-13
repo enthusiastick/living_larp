@@ -11,57 +11,73 @@ feature "User adds traits to a character", %Q{
   # * If I have specified correctly and have enough available points, my purchase is saved
   # * If I have not specified or do not have enough available points, I am presented with an error
 
-  # Failing; off-by-one mismatch between game.id and game_trait.game_id.
-  #
-  # scenario "happy path" do
-  #   count = Trait.all.count
-  #   user = FactoryGirl.create(:user)
-  #   game = FactoryGirl.create(:game)
-  #   game_trait = FactoryGirl.create(:game_trait)
-  #   character = FactoryGirl.create(:character)
-  #   login(user)
-  #   visit character_path(character)
-  #   select(game_trait.name, from: "trait")
-  #   fill_in "Purchases", with: "1"
-  #   click_on "Update Character"
+  scenario "happy path" do
+    count = Trait.all.count
+    user = FactoryGirl.create(:user)
+    game = FactoryGirl.create(:game, user: user)
+    game_trait = FactoryGirl.create(:game_trait, game: game)
+    character = FactoryGirl.create(:character, game: game, user: user)
+    login(user)
+    visit character_path(character)
+    click_on "Update Character"
+    select(game_trait.name, from: "trait")
+    fill_in "Purchases", with: "1"
+    click_on "Update Character"
 
-  #   expect(page).to have_content("successfully")
-  #   expect(page).to have_content("97")
-  #   expect(Trait.all.count).to eq(count + 1)
-  #   expect(Trait.last.game_trait_id).to eq(game_trait.id)
-  #   expect(Trait.last.character_id).to eq(character.id)
-  # end
+    expect(page).to have_content("successfully")
+    expect(page).to have_content(game.starting_points - game_trait.point_cost)
+    expect(Trait.all.count).to eq(count + 1)
+    expect(Trait.last.game_trait_id).to eq(game_trait.id)
+    expect(Trait.last.character_id).to eq(character.id)
+  end
 
   scenario "no specified info" do
     count = Trait.all.count
     user = FactoryGirl.create(:user)
-    game = FactoryGirl.create(:game)
-    game_trait = FactoryGirl.create(:game_trait)
-    character = FactoryGirl.create(:character)
+    game = FactoryGirl.create(:game, user: user)
+    game_trait = FactoryGirl.create(:game_trait, game: game)
+    character = FactoryGirl.create(:character, game: game, user: user)
     login(user)
     visit character_path(character)
-    click_on "Update Character"
-
+    2.times do
+      click_on "Update Character"
+    end
     expect(page).to have_content("check your input")
     expect(Trait.all.count).to eq(count)
   end
 
-  # Failing; off-by-one mismatch between game.id and game_trait.game_id.
-  #
-  # scenario "not enough available points" do
-  #   count = Trait.all.count
-  #   user = FactoryGirl.create(:user)
-  #   game = FactoryGirl.create(:game)
-  #   game_trait = FactoryGirl.create(:game_trait)
-  #   character = FactoryGirl.create(:character)
-  #   login(user)
-  #   visit character_path(character)
-  #   select(game_trait.name, from: "trait")
-  #   fill_in "Purchases", with: "1000"
-  #   click_on "Update Character"
+  scenario "not enough available points" do
+    count = Trait.all.count
+    user = FactoryGirl.create(:user)
+    game = FactoryGirl.create(:game, user: user)
+    game_trait = FactoryGirl.create(:game_trait, game: game)
+    character = FactoryGirl.create(:character, game: game, user: user)
+    login(user)
+    visit character_path(character)
+    click_on "Update Character"
+    select(game_trait.name, from: "trait")
+    fill_in "Purchases", with: "10"
+    click_on "Update Character"
 
-  #   expect(page).to have_content("do not have enough")
-  #   expect(Trait.all.count).to eq(count)
-  # end
+    expect(page).to have_content("not enough")
+    expect(Trait.all.count).to eq(count)
+  end
+
+  scenario "exceeds max purchases" do
+    count = Trait.all.count
+    user = FactoryGirl.create(:user)
+    game = FactoryGirl.create(:game, user: user)
+    game_trait = FactoryGirl.create(:game_trait, game: game)
+    character = FactoryGirl.create(:character, game: game, user: user)
+    login(user)
+    visit character_path(character)
+    click_on "Update Character"
+    select(game_trait.name, from: "trait")
+    fill_in "Purchases", with: "1000"
+    click_on "Update Character"
+
+    expect(page).to have_content("exceeds maximum purchases")
+    expect(Trait.all.count).to eq(count)
+  end
 
 end
