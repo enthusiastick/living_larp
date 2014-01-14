@@ -1,10 +1,10 @@
 <%- if user_signed_in? -%>
   <div>
-    <%- unless @user.games == [] -%>
+    <%- unless current_user.games == [] -%>
       <h5>My games:</h5>
       <table width=100%>
         <tbody>
-          <%- @user.games.each do |game| -%>
+          <%- current_user.games.each do |game| -%>
             <tr><td><%= link_to game.name, game_path(game) %></td></tr>
           <%- end -%>
         </tbody>
