@@ -20,6 +20,12 @@ class CharactersController < ApplicationController
 
   def new
     @character = Character.new
+    @users_games = current_user.games
+    unless current_user.players == nil
+      current_user.players.each do |player|
+        @users_games << player.game
+      end
+    end
   end
 
   def show

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature "User creates a game", %Q{
+feature "User creates a character", %Q{
   As an authenticated user
   I want to create a new character
   So that I can become a player
@@ -15,6 +15,7 @@ feature "User creates a game", %Q{
     count = Character.count
     user = FactoryGirl.create(:user)
     game = FactoryGirl.create(:game)
+    player = FactoryGirl.create(:player, user: user, game: game)
     login(user)
     visit new_character_path
     fill_in "Name", with: "Rafael"

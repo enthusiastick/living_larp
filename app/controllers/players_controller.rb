@@ -4,11 +4,10 @@ class PlayersController < ApplicationController
     @player = Player.new(player_params)
     if @player.save
       flash['alert-box success'] = "Player added successfully."
-      redirect_to game_players_path(@player.game)
     else
-      flash.now['alert-box alert'] = "Error! Unable to add player."
-      render 'player/new'
+      flash['alert-box alert'] = "Error! Unable to add player."
     end
+    redirect_to game_players_path(@player.game)
   end
 
   def index

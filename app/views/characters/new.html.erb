@@ -3,7 +3,7 @@
 
   <%= simple_form_for @character do |f| %>
     <%= f.input :name %>
-    <%= f.association :game %>
+    <%= f.association :game, collection: @users_games %>
     <%= f.button :submit %>
   <% end %>
 <%- end -%>
