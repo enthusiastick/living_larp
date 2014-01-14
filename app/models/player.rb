@@ -10,4 +10,8 @@ class Player < ActiveRecord::Base
     self.user.email
   end
 
+  def name
+    self.game.name
+  end
+
 end

@@ -15,7 +15,6 @@ class GamesController < ApplicationController
   end
 
   def index
-    # @games = Game.where("user_id = current_user)
     @games = Game.all.select { |g| g.user == current_user }
   end
 

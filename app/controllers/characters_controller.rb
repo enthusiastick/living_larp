@@ -6,6 +6,7 @@ class CharactersController < ApplicationController
   def create
     @character = Character.new(character_params)
     @character.user = current_user
+    @character.game = @character.player.game unless @character.player == nil
       if @character.save
         flash['alert-box success'] = "Character created successfully."
         redirect_to character_path(@character)
@@ -21,12 +22,8 @@ class CharactersController < ApplicationController
 
   def new
     @character = Character.new
-    @games_list = current_user.games
-    unless current_user.players == nil
-      current_user.players.each do |player|
-        @games_list << player.game
-      end
-    end
+    @games = Game.all.select { |g| g.user == current_user }
+    @player_games = Player.all.select { |p| p.user == current_user }
   end
 
   def show
@@ -40,7 +37,7 @@ class CharactersController < ApplicationController
   protected
 
   def character_params
-    params.require(:character).permit(:name, :game_id, :user_id, :available_points)
+    params.require(:character).permit(:name, :game_id, :user_id, :available_points, :player_id)
   end
 
 end
