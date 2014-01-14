@@ -20,13 +20,12 @@ feature "User creates a character", %Q{
     visit new_character_path
     fill_in "Name", with: "Rafael"
     select(game.name, from: "Game")
-    click_on "Create Character"
+    click_on "Create Player"
 
     expect(page).to have_content("Rafael")
     expect(Character.count).to eq(count + 1)
     expect(Character.last.game_id).to eq(game.id)
     expect(Character.last.user_id).to eq(user.id)
-
   end
 
   scenario "missing info" do
@@ -34,7 +33,7 @@ feature "User creates a character", %Q{
     user = FactoryGirl.create(:user)
     login(user)
     visit new_character_path
-    click_on "Create Character"
+    click_on "Create NPC"
 
     expect(page).to have_content("Error")
     expect(Character.count).to eq(count)
