@@ -1,11 +1,11 @@
 class CharactersController < ApplicationController
 
   before_action :authenticate_user, only: [:new, :create]
-  before_action :set_user, only: [:create, :index, :show]
+  # before_action :set_user, only: [:create, :index, :show]
 
   def create
     @character = Character.new(character_params)
-    @character.user = @user
+    @character.user = current_user
       if @character.save
         flash['alert-box success'] = "Character created successfully."
         redirect_to character_path(@character)
@@ -16,23 +16,24 @@ class CharactersController < ApplicationController
   end
 
   def index
+
   end
 
   def new
     @character = Character.new
-    @users_games = current_user.games
+    @games_list = current_user.games
     unless current_user.players == nil
       current_user.players.each do |player|
-        @users_games << player.game
+        @games_list << player.game
       end
     end
   end
 
   def show
-    if @user == nil
-      raise ActionController::RoutingError.new('Not Found')
+    if user_signed_in?
+      @character = current_user.characters.find(params[:id])
     else
-      @character = @user.characters.find(params[:id])
+      raise ActionController::RoutingError.new('Not Found')
     end
   end
 
