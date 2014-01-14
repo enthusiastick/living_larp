@@ -2,7 +2,7 @@
   <h3>Create NPC</h3>
 
   <%= simple_form_for @character do |f| %>
-    <%= f.input :name, label: "Carol" %>
+    <%= f.input :name %>
     <%= f.association :game, collection: @games %>
     <%= f.button :submit, "Create NPC" %>
   <% end %>

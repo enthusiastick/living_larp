@@ -43,9 +43,11 @@ feature "User adds players to a game", %Q{
   end
 
   scenario "view players index" do
-    game = FactoryGirl.create(:game)
+    user = FactoryGirl.create(:user)
+    game = FactoryGirl.create(:game, user: user)
     player1 = FactoryGirl.create(:player, game: game)
     player2 = FactoryGirl.create(:player, game: game)
+    login(user)
     visit game_players_path(game)
 
     expect(page).to have_content(player1.user.name)

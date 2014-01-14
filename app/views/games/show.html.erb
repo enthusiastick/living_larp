@@ -30,9 +30,11 @@
     </table>
   <%- end -%>
 
-  <ul class="inline-list">
-    <li><%= button_to 'Configure Traits', new_game_game_trait_path(@game), method: :get, class: 'button' %></li>
-    <li><%= button_to 'Manage Players', game_players_path(@game), method: :get, class: 'button' %></li>
-  </ul>
+  <%- if current_user == @game.user -%>
+    <ul class="inline-list">
+      <li><%= button_to 'Configure Traits', new_game_game_trait_path(@game), method: :get, class: 'button' %></li>
+      <li><%= button_to 'Manage Players', game_players_path(@game), method: :get, class: 'button' %></li>
+    </ul>
+  <%- end -%>
 
 <%- end -%>

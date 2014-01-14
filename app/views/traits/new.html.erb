@@ -1,29 +1,31 @@
 <%- if user_signed_in? -%>
-  <h2><%= @character.name %></h2>
-  <p>Available Points: <%= @character.available_points %></p>
-  <%- unless @character.traits == [] -%>
-    <table>
-      <thead>
+  <%- if current_user = @character.user -%>
+    <h2><%= @character.name %></h2>
+    <p>Available Points: <%= @character.available_points %></p>
+    <%- unless @character.traits == [] -%>
+      <table>
+        <thead>
+          <tr>
+            <th>Trait</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+        <%- @character.traits.each do |trait| -%>
         <tr>
-          <th>Trait</th>
-          <th></th>
+          <td><%= trait.game_trait.name %></td>
+          <td><%= trait.purchases %></td>
         </tr>
-      </thead>
-      <tbody>
-      <%- @character.traits.each do |trait| -%>
-      <tr>
-        <td><%= trait.game_trait.name %></td>
-        <td><%= trait.purchases %></td>
-      </tr>
-      <%- end -%>
-      </tbody>
-    </table>
-  <%- end -%>
+        <%- end -%>
+        </tbody>
+      </table>
+    <%- end -%>
 
-  <%= simple_form_for [@character, @trait] do |f| %>
-    <%= f.association :game_trait, collection: @traits_collection %>
-    <%= f.input :purchases %>
-    <%= f.button :submit, 'Update Character' %>
-  <% end %>
+    <%= simple_form_for [@character, @trait] do |f| %>
+      <%= f.association :game_trait, collection: @traits_collection %>
+      <%= f.input :purchases %>
+      <%= f.button :submit, 'Update Character' %>
+    <% end %>
+  <%- end -%>
 <%- end -%>
 

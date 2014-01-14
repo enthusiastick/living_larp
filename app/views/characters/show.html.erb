@@ -20,7 +20,9 @@
     </table>
   <%- end -%>
 
-  <%= button_to 'Update Character', new_character_trait_path(@character), method: :get, class: 'button' %>
+  <%- if current_user = @character.user -%>
+    <%= button_to 'Update Character', new_character_trait_path(@character), method: :get, class: 'button' %>
+  <%- end -%>
 
 <%- end -%>
 
