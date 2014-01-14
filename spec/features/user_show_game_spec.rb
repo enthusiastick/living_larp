@@ -22,7 +22,7 @@ feature "User views a game", %Q{
     game = FactoryGirl.create(:game)
     login(user)
 
-    expect { visit game_path(game) }.to raise_error(ActiveRecord::RecordNotFound)
+    expect { visit game_path(game) }.to raise_error(ActionController::RoutingError)
   end
 
   scenario "logged in, my game" do

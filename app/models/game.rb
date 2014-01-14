@@ -6,4 +6,5 @@ class Game < ActiveRecord::Base
   has_many :game_traits
   has_many :characters
   has_many :players
+  has_many :users, through: :players
 end

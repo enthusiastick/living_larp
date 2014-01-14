@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   has_many :games
   has_many :characters
   has_many :players
+  has_many :games, through: :players
 
   def name
     self.email

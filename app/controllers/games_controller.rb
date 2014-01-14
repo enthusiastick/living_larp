@@ -15,6 +15,8 @@ class GamesController < ApplicationController
   end
 
   def index
+    # @games = Game.where("user_id = current_user)
+    @games = Game.all.select { |g| g.user == current_user }
   end
 
   def new
@@ -22,10 +24,9 @@ class GamesController < ApplicationController
   end
 
   def show
-    if current_user == nil
+    @game = Game.find(params[:id])
+    if current_user == nil || @game.user != current_user
       raise ActionController::RoutingError.new('Not Found')
-    else
-      @game = current_user.games.find(params[:id])
     end
   end
 
