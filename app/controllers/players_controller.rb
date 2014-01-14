@@ -12,6 +12,10 @@ class PlayersController < ApplicationController
 
   def index
     @game = Game.find(params[:game_id])
+    @playerlist = Array.new
+    @game.players.each do |player|
+      @playerlist << player.user
+    end
   end
 
   def new
