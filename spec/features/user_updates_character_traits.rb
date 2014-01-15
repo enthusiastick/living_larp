@@ -50,28 +50,37 @@ feature "User updates character traits", %Q{
       click_on "Update Character"
     end
 
-    expect(page).to have_content("Error")
+    expect(page).to have_content("not enough")
     expect(page).to have_content(game_trait.name + ' 5')
     expect(page).to have_content(game.starting_points - (game_trait.point_cost*5))
     expect(Trait.count).to eq(count + 1)
     expect(Trait.last.purchases).to eq(5)
   end
 
-  # scenario "exceeds max purchases" do
-  #   count = Trait.count
-  #   user = FactoryGirl.create(:user)
-  #   game = FactoryGirl.create(:game, user: user)
-  #   game_trait = FactoryGirl.create(:game_trait, game: game)
-  #   character = FactoryGirl.create(:character, game: game, user: user)
-  #   login(user)
-  #   visit character_path(character)
-  #   click_on "Update Character"
-  #   select(game_trait.name, from: "trait")
-  #   fill_in "Purchases", with: "1000"
-  #   click_on "Update Character"
+  scenario "exceeds max purchases" do
+    count = Trait.count
+    user = FactoryGirl.create(:user)
+    game = FactoryGirl.create(:game)
+    game_trait = FactoryGirl.create(:game_trait, game: game)
+    player = FactoryGirl.create(:player, user: user, game: game)
+    character = FactoryGirl.create(:character, user: user, player: player, game: game)
+    login(user)
+    visit character_path(character)
+    click_on "Update Character"
+    select(game_trait.name, from: "trait")
+    fill_in "Purchases", with: "1"
+    click_on "Update Character"
+    visit character_path(character)
+    click_on "Update Character"
+    select(game_trait.name, from: "trait")
+    fill_in "Purchases", with: "1000"
+    click_on "Update Character"
 
-  #   expect(page).to have_content("exceeds maximum purchases")
-  #   expect(Trait.count).to eq(count)
-  # end
+    expect(page).to have_content("exceeds maximum purchases")
+    expect(page).to have_content(game_trait.name + ' 1')
+    expect(page).to have_content(game.starting_points - game_trait.point_cost)
+    expect(Trait.count).to eq(count + 1)
+    expect(Trait.last.purchases).to eq(1)
+  end
 
 end
