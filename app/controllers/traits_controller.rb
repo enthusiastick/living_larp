@@ -4,8 +4,9 @@ class TraitsController < ApplicationController
 
   def create
     @character = Character.find(params[:character_id])
-    @trait = Trait.find_or_initialize_by(character: @character, game_trait_id: params[:trait][:game_trait_id], purchases: params[:trait][:purchases])
+    @trait = Trait.find_or_initialize_by(character: @character, game_trait_id: params[:trait][:game_trait_id])
     if @trait.id == nil
+      @trait.purchases = params[:trait][:purchases]
       if @trait.save
         flash['alert-box success'] = "Character updated successfully."
         redirect_to new_character_trait_path(@character)

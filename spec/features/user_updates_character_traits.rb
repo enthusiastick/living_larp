@@ -19,7 +19,7 @@ feature "User adds traits to a character", %Q{
     player = FactoryGirl.create(:player, user: user, game: game)
     character = FactoryGirl.create(:character, user: user, player: player, game: game)
     login(user)
-    2.times do
+    3.times do
       visit character_path(character)
       click_on "Update Character"
       select(game_trait.name, from: "trait")
@@ -28,10 +28,10 @@ feature "User adds traits to a character", %Q{
     end
 
     expect(page).to have_content("successfully")
-    expect(page).to have_content(game_trait.name + ' 2')
-    expect(page).to have_content(game.starting_points - (game_trait.point_cost*2))
-    expect(Trait.count).to eq(count)
-    expect(Trait.last.purchases).to eq(2)
+    expect(page).to have_content(game_trait.name + ' 3')
+    expect(page).to have_content(game.starting_points - (game_trait.point_cost*3))
+    expect(Trait.count).to eq(count + 1)
+    expect(Trait.last.purchases).to eq(3)
   end
 
 

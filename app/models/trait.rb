@@ -7,7 +7,7 @@ class Trait < ActiveRecord::Base
   belongs_to :character
 
   before_create :set_cost
-  validate :check_balance
+  validate :debit
   before_validation :allowed
 
   def set_cost
@@ -27,10 +27,14 @@ class Trait < ActiveRecord::Base
     end
   end
 
-  def check_balance
+  def debit
     unless self.game_trait == nil || self.purchases == nil
+      if self.id == nil
+        cost = self.game_trait.point_cost * self.purchases
+      else
+        cost = self.game_trait.point_cost * (self.purchases - (self.character.traits.find(self.id).purchases))
+      end
       character = self.character
-      cost = self.game_trait.point_cost * self.purchases
       balance = character.available_points
       if balance - cost < 0
         errors.add(:purchases, "not enough available points")
