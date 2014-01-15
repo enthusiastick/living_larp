@@ -36,10 +36,11 @@ class PlayersController < ApplicationController
     @player.points = @player.points + points_param[:points].to_i
     if @player.save
       flash.now['alert-box success'] = "Points awarded successfully."
+      render 'show'
     else
-      flash.now['alert-box alert'] = "Error! Unable to award points."
+      flash['alert-box alert'] = "Error! Unable to award points."
+      redirect_to game_player_path(@player.game, @player)
     end
-    render 'show'
   end
 
   protected
