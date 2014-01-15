@@ -8,6 +8,16 @@ if Rails.env.development?
 
 end
 
+if Rails.env.staging?
+
+  ActionMailer::Base.delivery_method = :smtp
+  ActionMailer::Base.smtp_settings = {
+    address: "localhost",
+    port: 1025
+  }
+
+end
+
 if Rails.env.production?
 
   ActionMailer::Base.delivery_method = :smtp
