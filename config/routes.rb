@@ -14,7 +14,7 @@ LivingLarp::Application.routes.draw do
   end
 
   resources :characters, only: [:create, :index, :new, :show] do
-    resources :traits, only: [:create, :new]
+    resources :traits, only: [:create, :new, :show]
   end
 
 end
