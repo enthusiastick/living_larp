@@ -1,6 +1,20 @@
 <%- if user_signed_in? -%>
   <h2><%= @character.name %></h2>
-  <p>Available Points: <%= @character.available_points %></p>
+  <%- unless @character.player == nil -%>
+    <p>My Available Points: <%= @character.player.points%></p>
+  <%- end -%>
+  <p><%= @character.name %>'s Available Points: <%= @character.available_points %></p>
+
+  <%- unless @character.player == nil -%>
+    <div>
+      <%= form_tag(character_path(@character), method: :patch, action: :update) do %>
+        <%= label_tag(:available_points, "Points:") %>
+        <%= text_field_tag(:available_points) %>
+        <%= submit_tag "Transfer Points", class: "button" %>
+      <% end %>
+    </div>
+  <%- end -%>
+
   <%- unless @character.traits == [] -%>
     <table>
       <thead>

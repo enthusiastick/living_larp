@@ -1,7 +1,6 @@
 class CharactersController < ApplicationController
 
   before_action :authenticate_user, only: [:new, :create]
-  # before_action :set_user, only: [:create, :index, :show]
 
   def create
     @character = Character.new(character_params)
@@ -14,10 +13,6 @@ class CharactersController < ApplicationController
         flash.now['alert-box alert'] = "Error! Please check your input and retry."
         render :new
       end
-  end
-
-  def index
-
   end
 
   def new
@@ -34,10 +29,33 @@ class CharactersController < ApplicationController
     end
   end
 
+  def update
+    @character = Character.find(params[:id])
+    @player = @character.player
+    if @player.points < point_params.to_i
+      flash['alert-box alert'] = "Error! Transaction could not be completed."
+      redirect_to character_path(@character)
+    else
+      @character.available_points = @character.available_points + point_params.to_i
+      if @character.save
+        @player.decrement!(:points, by = point_params.to_i)
+        flash.now['alert-box success'] = "Points transferred successfully."
+        render 'show'
+      else
+        flash['alert-box alert'] = "Error! Unable to transfer points."
+        redirect_to character_path(@character)
+      end
+    end
+  end
+
   protected
 
   def character_params
     params.require(:character).permit(:name, :game_id, :user_id, :available_points, :player_id)
+  end
+
+  def point_params
+    params.require(:available_points)
   end
 
 end

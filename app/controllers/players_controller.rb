@@ -33,7 +33,7 @@ class PlayersController < ApplicationController
 
   def update
     @player = Player.find(params[:id])
-    @player.points = @player.points + points_param[:points].to_i
+    @player.points = @player.points + points_param.to_i
     if @player.save
       flash.now['alert-box success'] = "Points awarded successfully."
       render 'show'
@@ -50,7 +50,7 @@ class PlayersController < ApplicationController
   end
 
   def points_param
-    params.permit(:points)
+    params.require(:points)
   end
 
 end
