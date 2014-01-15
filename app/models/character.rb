@@ -12,4 +12,13 @@ class Character < ActiveRecord::Base
     self.available_points = self.game.starting_points
   end
 
+  def spent
+    spent = 0
+    self.traits.each do |trait|
+      spent += trait.points_spent
+    end
+    spent
+  end
+
+
 end

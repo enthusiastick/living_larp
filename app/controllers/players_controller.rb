@@ -12,10 +12,7 @@ class PlayersController < ApplicationController
 
   def index
     @game = Game.find(params[:game_id])
-    @playerlist = Array.new
-    @game.players.each do |player|
-      @playerlist << player.user
-    end
+    @players = @game.players
   end
 
   def new
@@ -30,10 +27,29 @@ class PlayersController < ApplicationController
     end
   end
 
+  def show
+    @player = Player.find(params[:id])
+  end
+
+  def update
+    @player = Player.find(params[:id])
+    @player.points = @player.points + points_param[:points].to_i
+    if @player.save
+      flash.now['alert-box success'] = "Points awarded successfully."
+    else
+      flash.now['alert-box alert'] = "Error! Unable to award points."
+    end
+    render 'show'
+  end
+
   protected
 
   def player_params
     params.require(:player).permit(:user_id, :game_id)
+  end
+
+  def points_param
+    params.permit(:points)
   end
 
 end

@@ -1,11 +1,12 @@
 <%- if user_signed_in? -%>
   <%- if current_user == @game.user -%>
 
-    <%- unless @game.players == nil %>
+    <%- unless @players == nil %>
+      <h3><%= @game.name %> Players:</h3>
       <table width=100%>
         <tbody>
-          <% @playerlist.each do |user| %>
-            <tr><td><%= user.email %></td><tr>
+          <% @players.each do |player| %>
+            <tr><td><%= link_to player.user.email, game_player_path(@game, player) %></td><tr>
           <% end %>
         </tbody>
       </table>
