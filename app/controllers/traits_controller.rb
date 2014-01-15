@@ -4,14 +4,17 @@ class TraitsController < ApplicationController
 
   def create
     @character = Character.find(params[:character_id])
-    @trait = Trait.new(trait_params)
-    @trait.character = @character
-    if @trait.save
-      flash['alert-box success'] = "Character updated successfully."
-      redirect_to new_character_trait_path(@character)
+    @trait = Trait.find_or_initialize_by(character: @character, game_trait_id: params[:trait][:game_trait_id], purchases: params[:trait][:purchases])
+    if @trait.id == nil
+      if @trait.save
+        flash['alert-box success'] = "Character updated successfully."
+        redirect_to new_character_trait_path(@character)
+      else
+        flash.now['alert-box alert'] = "Error! Please check your input and retry."
+        render 'traits/new'
+      end
     else
-      flash.now['alert-box alert'] = "Error! Please check your input and retry."
-      render 'traits/new'
+      update
     end
   end
 
@@ -22,6 +25,21 @@ class TraitsController < ApplicationController
   end
 
   protected
+
+  def update
+    @character = Character.find(params[:character_id])
+    @trait = Trait.find_or_initialize_by(character: @character, game_trait_id: params[:trait][:game_trait_id])
+    @transaction_cost = (GameTrait.find(params[:trait][:game_trait_id]).point_cost * params[:trait][:purchases].to_i)
+    @trait.purchases = @trait.purchases + params[:trait][:purchases].to_i
+    @trait.points_spent = @trait.points_spent + @transaction_cost
+    if @trait.save
+      flash['alert-box success'] = "Character updated successfully."
+      redirect_to new_character_trait_path(@character)
+    else
+      flash.now['alert-box alert'] = "Error! Please check your input and retry."
+      render 'traits/new'
+    end
+  end
 
   def trait_params
     params.require(:trait).permit(:purchases, :game_trait_id, :character_id)

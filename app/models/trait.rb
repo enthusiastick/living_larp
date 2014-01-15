@@ -6,7 +6,7 @@ class Trait < ActiveRecord::Base
   belongs_to :game_trait
   belongs_to :character
 
-  before_save :set_cost
+  before_create :set_cost
   validate :check_balance
   before_validation :allowed
 
