@@ -2,6 +2,7 @@ class PlayersController < ApplicationController
 
   def create
     @player = Player.new(player_params)
+    @player.points = 0
     if @player.save
       flash['alert-box success'] = "Player added successfully."
     else
