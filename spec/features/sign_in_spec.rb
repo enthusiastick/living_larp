@@ -14,39 +14,39 @@ feature "User signs in", %Q{
   scenario 'existing user specifies valid info' do
     user = FactoryGirl.create(:user)
     visit root_path
-    click_link 'Sign In'
+    click_button 'sign_in_menu'
     fill_in 'Email', with: user.email
     fill_in 'Password', with: user.password
     user.confirmed_at = Time.now
     user.save
 
-    click_button 'Sign In'
+    click_button 'sign_in_session'
     expect(page).to have_content('Welcome')
-    expect(page).to have_content('Sign Out')
+    expect(page).to have_button('Sign Out')
   end
 
   scenario 'an unregistered user signs in' do
     visit root_path
-    click_link 'Sign In'
+    click_button 'sign_in_menu'
     fill_in 'Email', with: 'whoever@example.com'
     fill_in 'Password', with: '1234'
 
-    click_button 'Sign In'
+    click_button 'sign_in_session'
     expect(page).to_not have_content('Welcome')
-    expect(page).to_not have_content('Sign Out')
+    expect(page).to_not have_button('Sign Out')
     expect(page).to have_content('Invalid')
   end
 
   scenario 'existing user with wrong password' do
     user = FactoryGirl.create(:user)
     visit root_path
-    click_link 'Sign In'
+    click_button 'sign_in_menu'
     fill_in 'Email', with: user.email
     fill_in 'Password', with: 'wrong'
 
-    click_button 'Sign In'
+    click_button 'sign_in_session'
     expect(page).to_not have_content('Welcome')
-    expect(page).to_not have_content('Sign Out')
+    expect(page).to_not have_button('Sign Out')
     expect(page).to have_content('Invalid')
   end
 
@@ -58,9 +58,9 @@ feature "User signs in", %Q{
     user.confirmed_at = Time.now
     user.save
 
-    click_button 'Sign In'
-    expect(page).to have_content('Sign Out')
-    expect(page).to_not have_content('Sign In')
+    click_button 'sign_in_session'
+    expect(page).to have_button('Sign Out')
+    expect(page).to_not have_button('Sign In')
 
     visit new_user_session_path
     expect(page).to have_content('already signed in')

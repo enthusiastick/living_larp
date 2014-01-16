@@ -18,7 +18,7 @@ feature "User creates a character", %Q{
     player = FactoryGirl.create(:player, user: user, game: game)
     login(user)
     visit new_character_path
-    fill_in "Name", with: "Rafael"
+    fill_in "player_character", with: "Rafael"
     select(game.name, from: "Game")
     click_on "Create Player"
 

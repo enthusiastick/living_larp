@@ -40,8 +40,8 @@
             </ul>
 
           <%- else -%>
-            <%= button_to 'Sign Up', new_user_registration_path, class: "button expand", method: :get %>
-            <%= button_to 'Sign In', new_user_session_path, class: "button expand", method: :get %>
+            <%= button_to 'Sign Up', new_user_registration_path, class: "button expand", method: :get, id: "sign_up_menu" %>
+            <%= button_to 'Sign In', new_user_session_path, class: "button expand", method: :get, id: "sign_in_menu" %>
           <%- end -%>
           <%= button_to 'Contact Us', contact_us_path, class: "button expand", method: :get %>
         </nav>

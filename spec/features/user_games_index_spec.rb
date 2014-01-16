@@ -16,7 +16,7 @@ feature "User views games index", %Q{
     login(user)
     visit games_path
 
-    expect(page).to have_content("Add New Game")
+    expect(page).to have_button("Create A Game")
   end
 
   scenario "with games only created by user" do
