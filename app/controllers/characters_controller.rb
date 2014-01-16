@@ -34,7 +34,7 @@ class CharactersController < ApplicationController
   def update
     @character = Character.find(params[:id])
     @player = @character.player
-    if @player.points < point_params.to_i
+    if @player.points < point_params.to_i || point_params.to_i <= 0
       flash[:alert] = "Error! Transaction could not be completed."
       redirect_to character_path(@character)
     else

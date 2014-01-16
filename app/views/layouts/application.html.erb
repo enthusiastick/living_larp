@@ -23,7 +23,7 @@
         <nav class="side-nav">
           <%- if user_signed_in? -%>
             <div class="panel round">
-              <h5><%= current_user.email %></h5>
+              <p class="usertag"><%= current_user.email %></p>
             </div>
             <%= button_to 'Sign Out', destroy_user_session_path, class: "button expand", method: :get %>
 

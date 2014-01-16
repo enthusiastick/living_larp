@@ -34,13 +34,18 @@ class PlayersController < ApplicationController
 
   def update
     @player = Player.find(params[:id])
-    @player.points = @player.points + points_param.to_i
-    if @player.save
-      flash.now[:success] = "Points awarded successfully."
-      render 'show'
-    else
+    if points_param.to_i <= 0
       flash[:alert] = "Error! Unable to award points."
       redirect_to game_player_path(@player.game, @player)
+    else
+      @player.points = @player.points + points_param.to_i
+      if @player.save
+        flash.now[:success] = "Points awarded successfully."
+        render 'show'
+      else
+        flash[:alert] = "Error! Unable to award points."
+        redirect_to game_player_path(@player.game, @player)
+      end
     end
   end
 
