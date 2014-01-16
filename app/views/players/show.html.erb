@@ -1,45 +1,49 @@
-<h3><%= @player.game.name %> Player</h3>
-<h5><%= @player.user.email %></h3>
-  <p>Available Points: <%= @player.points %><p>
-  <div>
-    <%= form_tag(game_player_path(@player.game, @player), method: :patch, action: :update) do %>
-      <%= label_tag(:points, "Points:") %>
-      <%= text_field_tag(:points) %>
-      <%= submit_tag "Award Points", class: "button" %>
-    <% end %>
-  </div>
-</ul>
-<%- unless @player.characters == nil -%>
-<table>
-  <thead>
-    <tr>
-      <td>
-        Character
-      </td>
-      <td>
-        Unspent
-      </td>
-      <td>
-        Spent
-      </td>
-    </tr>
-  </thead>
-  <tbody>
-    <% @player.characters.each do |character| %>
-    <tr>
-      <td>
-        <%= character.name %>
-      </td>
-      <td>
-        <%= character.available_points %>
-      </td>
-      <td>
-        <%= character.spent %>
-      </td>
-    </tr>
-    <%- end -%>
-  </tbody>
-</table>
+<%- if user_signed_in? -%>
+  <h3><%= @player.game.name %> Player</h3>
+  <h5><%= @player.user.email %></h3>
+    <p>Available Points: <%= @player.points %><p>
+    <div>
+      <%- if @player.game.user == current_user -%>
+        <%= form_tag(game_player_path(@player.game, @player), method: :patch, action: :update) do %>
+          <%= label_tag(:points, "Points:") %>
+          <%= text_field_tag(:points) %>
+          <%= submit_tag "Award Points", class: "button" %>
+        <% end %>
+      <%- end -%>
+    </div>
+  </ul>
+  <%- unless @player.characters == nil -%>
+  <table>
+    <thead>
+      <tr>
+        <td>
+          Character
+        </td>
+        <td>
+          Unspent
+        </td>
+        <td>
+          Spent
+        </td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @player.characters.each do |character| %>
+      <tr>
+        <td>
+          <%= link_to character.name, character_path(character) %>
+        </td>
+        <td>
+          <%= character.available_points %>
+        </td>
+        <td>
+          <%= character.spent %>
+        </td>
+      </tr>
+      <%- end -%>
+    </tbody>
+  </table>
+  <%- end -%>
 <%- end -%>
 
 

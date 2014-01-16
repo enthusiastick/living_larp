@@ -22,8 +22,10 @@ class CharactersController < ApplicationController
   end
 
   def show
-    if user_signed_in?
-      @character = current_user.characters.find(params[:id])
+    if Character.find(params[:id]).game.user == current_user
+      @character = Character.find(params[:id])
+    elsif user_signed_in?
+      @character = current_user.characters.find(params[:id]) if current_user.characters.find(params[:id]) != nil
     else
       raise ActionController::RoutingError.new('Not Found')
     end
