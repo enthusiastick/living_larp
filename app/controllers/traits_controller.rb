@@ -8,10 +8,10 @@ class TraitsController < ApplicationController
     if @trait.id == nil
       @trait.purchases = params[:trait][:purchases]
       if @trait.save
-        flash['alert-box success'] = "Character updated successfully."
+        flash[:success] = "Character updated successfully."
         redirect_to new_character_trait_path(@character)
       else
-        flash.now['alert-box alert'] = "Error! Please check your input and retry."
+        flash.now[:alert] = "Error! Please check your input and retry."
         render 'traits/new'
       end
     else
@@ -34,10 +34,10 @@ class TraitsController < ApplicationController
     @trait.purchases = @trait.purchases + params[:trait][:purchases].to_i
     @trait.points_spent = @trait.points_spent + @transaction_cost
     if @trait.save
-      flash['alert-box success'] = "Character updated successfully."
+      flash[:success] = "Character updated successfully."
       redirect_to new_character_trait_path(@character)
     else
-      flash.now['alert-box alert'] = "Error! Please check your input and retry."
+      flash.now[:alert] = "Error! Please check your input and retry."
       render 'new'
     end
   end

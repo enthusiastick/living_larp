@@ -7,10 +7,10 @@ class CharactersController < ApplicationController
     @character.user = current_user
     @character.game = @character.player.game unless @character.player == nil
       if @character.save
-        flash['alert-box success'] = "Character created successfully."
+        flash[:success] = "Character created successfully."
         redirect_to character_path(@character)
       else
-        flash.now['alert-box alert'] = "Error! Please check your input and retry."
+        flash.now[:alert] = "Error! Please check your input and retry."
         render :new
       end
   end
@@ -35,16 +35,16 @@ class CharactersController < ApplicationController
     @character = Character.find(params[:id])
     @player = @character.player
     if @player.points < point_params.to_i
-      flash['alert-box alert'] = "Error! Transaction could not be completed."
+      flash[:alert] = "Error! Transaction could not be completed."
       redirect_to character_path(@character)
     else
       @character.available_points = @character.available_points + point_params.to_i
       if @character.save
         @player.decrement!(:points, by = point_params.to_i)
-        flash.now['alert-box success'] = "Points transferred successfully."
+        flash.now[:success] = "Points transferred successfully."
         render 'show'
       else
-        flash['alert-box alert'] = "Error! Unable to transfer points."
+        flash[:alert] = "Error! Unable to transfer points."
         redirect_to character_path(@character)
       end
     end

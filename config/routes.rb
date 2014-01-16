@@ -1,6 +1,6 @@
 LivingLarp::Application.routes.draw do
 
-  root 'games#index'
+  root 'pages#index'
 
   devise_for :users
 

@@ -7,10 +7,10 @@ class GameTraitsController < ApplicationController
     @game_trait = GameTrait.new(game_trait_params)
     @game_trait.game = @game
     if @game_trait.save
-      flash['alert-box success'] = "Trait added successfully."
+      flash[:success] = "Trait added successfully."
       redirect_to new_game_game_trait_path(@game)
     else
-      flash.now['alert-box alert'] = "Error! Please check your input and retry."
+      flash.now[:alert] = "Error! Please check your input and retry."
       render 'game_traits/new'
     end
 

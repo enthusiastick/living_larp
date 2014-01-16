@@ -36,6 +36,7 @@ gem 'simple_form'
 gem 'devise'
 gem 'mail_form'
 gem 'foundation-rails'
+gem 'fastclick-rails'
 
 group :staging, :production do
   gem 'rails_12factor'

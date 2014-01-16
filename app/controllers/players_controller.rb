@@ -4,9 +4,9 @@ class PlayersController < ApplicationController
     @player = Player.new(player_params)
     @player.points = 0
     if @player.save
-      flash['alert-box success'] = "Player added successfully."
+      flash[:success] = "Player added successfully."
     else
-      flash['alert-box alert'] = "Error! Unable to add player."
+      flash[:alert] = "Error! Unable to add player."
     end
     redirect_to game_players_path(@player.game)
   end
@@ -20,7 +20,7 @@ class PlayersController < ApplicationController
     @game = Game.find(params[:game_id])
     user_search = User.find_by email:(params[:email])
     if user_search == nil
-      flash['alert-box alert'] = "User not found."
+      flash[:alert] = "User not found."
       redirect_to game_players_path(@game)
     else
       @player = Player.new
@@ -36,10 +36,10 @@ class PlayersController < ApplicationController
     @player = Player.find(params[:id])
     @player.points = @player.points + points_param.to_i
     if @player.save
-      flash.now['alert-box success'] = "Points awarded successfully."
+      flash.now[:success] = "Points awarded successfully."
       render 'show'
     else
-      flash['alert-box alert'] = "Error! Unable to award points."
+      flash[:alert] = "Error! Unable to award points."
       redirect_to game_player_path(@player.game, @player)
     end
   end
