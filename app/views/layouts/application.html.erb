@@ -21,25 +21,29 @@
     <div class="row">
       <div class="small-3 columns">
         <nav class="side-nav">
-          <ul>
-            <%- if user_signed_in? -%>
-              <p><span class="round secondary label"><%= current_user.email %></span></p>
-              <li class="divider"></li>
-              <li><%= link_to 'Sign Out', destroy_user_session_path %></li>
-                <ul>
-                  <li><%= link_to 'Your Games', games_path %></li>
-                  <li><%= link_to 'Add New Game', new_game_path %></li>
-                </ul>
-                <ul>
-                  <li><%= link_to 'Your Characters', characters_path %></li>
-                  <li><%= link_to 'Add New Character', new_character_path %></li>
-                </ul>
-            <%- else -%>
-              <li><%= link_to 'Sign Up', new_user_registration_path %></li>
-              <li><%= link_to 'Sign In', new_user_session_path %></li>
-            <%- end -%>
-            <li><%= link_to 'Contact Us', contact_us_path %></li>
-          </ul>
+          <%- if user_signed_in? -%>
+            <div class="panel round">
+              <h5><%= current_user.email %></h5>
+            </div>
+            <%= button_to 'Sign Out', destroy_user_session_path, class: "button expand", method: :get %>
+
+            <a href="#" data-dropdown="games" class="button expand">Games</a><br>
+            <ul id="games" data-dropdown-content class="f-dropdown">
+              <li><%= link_to 'Your Games', games_path %></li>
+              <li><%= link_to 'Add New', new_game_path %></li>
+            </ul>
+
+            <a href="#" data-dropdown="characters" class="button expand">Characters</a><br>
+            <ul id="characters" data-dropdown-content class="f-dropdown">
+              <li><%= link_to 'Your Characters', characters_path %></li>
+              <li><%= link_to 'Add New', new_character_path %></li>
+            </ul>
+
+          <%- else -%>
+            <%= button_to 'Sign Up', new_user_registration_path, class: "button expand", method: :get %>
+            <%= button_to 'Sign In', new_user_session_path, class: "button expand", method: :get %>
+          <%- end -%>
+          <%= button_to 'Contact Us', contact_us_path, class: "button expand", method: :get %>
         </nav>
       </div>
       <div class="small-9 columns">
