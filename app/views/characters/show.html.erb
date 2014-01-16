@@ -16,7 +16,7 @@
       </div>
     <%- end -%>
   <%- else -%>
-    <p><%= @character.player.user.email %></p>
+    <p><%= @character.player.user.email unless @character.player == nil %></p>
   <%- end -%>
 
   <%- unless @character.traits == [] -%>
