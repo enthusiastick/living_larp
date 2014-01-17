@@ -6,7 +6,7 @@ class DagValidator < ActiveModel::Validator
     child_visited = explore(child, [])
     binding.pry
     if child_visited.include?(parent)
-      false
+      record.errors[:child] << 'This creates a prerequisites loop.'
     end
   end
 

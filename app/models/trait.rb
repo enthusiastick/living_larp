@@ -2,6 +2,7 @@ class Trait < ActiveRecord::Base
   validates_presence_of :purchases, :game_trait_id, :character_id
   validates :game_trait_id, uniqueness: { scope: :character_id,
     message: "character trait already exists" }
+  validates_with Prereq
 
   belongs_to :game_trait
   belongs_to :character
