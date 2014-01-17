@@ -19,6 +19,10 @@ describe GameTrait do
 
   describe "Association Tests" do
     it { should belong_to(:game) }
+    it { should have_many(:traits) }
+    it { should have_many(:characters).through(:traits) }
+    it { should have_many(:game_trait_dependencies) }
+    it { should have_many(:parent_traits).through(:game_trait_dependencies) }
   end
 
 end
