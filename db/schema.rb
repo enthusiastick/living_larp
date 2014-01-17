@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140115200240) do
+ActiveRecord::Schema.define(version: 20140117150734) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,15 @@ ActiveRecord::Schema.define(version: 20140115200240) do
     t.datetime "updated_at"
     t.integer  "player_id"
   end
+
+  create_table "game_trait_dependencies", force: true do |t|
+    t.integer  "parent_trait_id"
+    t.integer  "child_trait_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "game_trait_dependencies", ["parent_trait_id", "child_trait_id"], name: "prerequisite_game_trait_index", unique: true, using: :btree
 
   create_table "game_traits", force: true do |t|
     t.string   "name",          null: false

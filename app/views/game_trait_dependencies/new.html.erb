@@ -1,0 +1,9 @@
+<%- if user_signed_in? -%>
+
+<%= simple_form_for [@game, @game_trait_dependency] do |f| %>
+  <%= f.association :parent_trait, collection: @game.game_traits %>
+  <%= f.association :child_trait, collection: @game.game_traits %>
+  <%= f.button :submit, 'Set Prerequisite' %>
+<% end %>
+
+<%- end -%>

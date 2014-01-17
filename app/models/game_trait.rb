@@ -4,4 +4,6 @@ class GameTrait < ActiveRecord::Base
   belongs_to :game
   has_many :traits
   has_many :characters, through: :traits
+  has_many :game_trait_dependencies, foreign_key: 'child_trait_id'
+  has_many :parent_traits, through: :game_trait_dependencies
 end
