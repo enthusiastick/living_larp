@@ -1,14 +1,19 @@
 class DagValidator < ActiveModel::Validator
 
-  require 'd_a_g'
-  include DAG
+  class DAG < Hash
+    include TSort
+    alias tsort_each_node each_key
+    def tsort_each_child(node, &block)
+      fetch(node).each(&block)
+    end
+  end
 
   def validate(record)
     graph = DAG.new
     graph[record.parent_trait] = [record.child_trait]
     record.child_trait.game.game_traits.each do |trait|
-      trait.game_trait_depencies.each do |dependency|
-        if graph[dependency.parent_trait] = nil
+      trait.game_trait_dependencies.each do |dependency|
+        if graph[dependency.parent_trait] == nil
           graph[dependency.parent_trait] = dependency.child_trait
         else
           graph[dependency.parent_trait] << dependency.child_trait
