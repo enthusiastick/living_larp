@@ -12,62 +12,86 @@
   </head>
 
   <body>
-
     <div class="row">
-      <div class="small-9 small-offset-3 columns">
+      <div class="small-12 columns">
         <h1><%= link_to 'Living LARP', root_path %> <span class="tiny">pre-alpha</span></h1>
       </div>
     </div>
-    <div class="row">
-      <div class="small-3 columns">
-        <nav class="side-nav">
-          <%- if user_signed_in? -%>
-            <div class="panel round">
-              <p class="usertag"><%= current_user.email %></p>
+
+    <%- if user_signed_in? -%>
+
+      <div class="row">
+        <div class="small-12 columns">
+
+          <div class="off-canvas-wrap">
+            <div class="inner-wrap">
+              <nav class="tab-bar">
+                <section class="left-small">
+                  <a class="left-off-canvas-toggle menu-icon" ><span></span></a>
+                </section>
+
+                <section class="middle tab-bar-section">
+                  <p class="usertag"><%= current_user.email %></p>
+                </section>
+              </nav>
+
+              <aside class="left-off-canvas-menu">
+                <ul class="off-canvas-list">
+                  <li><label>User</label></li>
+                  <li><%= link_to 'Sign Out', destroy_user_session_path %></li>
+                  <li><label>Characters</label></li>
+                  <li><%= link_to 'Your Characters', characters_path %></li>
+                  <li><%= link_to 'Add New', new_character_path %></li>
+                  <li><label>Games</label></li>
+                  <li><%= link_to 'Your Games', games_path %></li>
+                  <li><%= link_to 'Add New', new_game_path %></li>
+                  <li><label>Site</label></li>
+                  <li><%= link_to 'Contact Us', contact_us_path %></li>
+                </ul>
+              </aside>
+
+              <div class="small-11 small-centered columns" >
+                <section class="main-section">
+                  <% flash.each do |name, msg| %>
+                    <% if msg.is_a?(String) %>
+                      <div data-alert class="alert-box <%=
+                        if name == :success
+                          "success"
+                        elsif name == :alert
+                          "alert"
+                        else
+                           nil
+                        end %>">
+                        <%= content_tag :div, msg %>
+                        <a href="#" class="close">&times;</a>
+                      </div>
+                    <% end %>
+                  <% end %>
+                  <%= yield %>
+                </section>
+              </div>
+
+              <a class="exit-off-canvas"></a>
             </div>
-            <%= button_to 'Sign Out', destroy_user_session_path, class: "button expand", method: :get %>
+          </div>
 
-            <a href="#" data-dropdown="games" class="button expand">Games</a><br>
-            <ul id="games" data-dropdown-content class="f-dropdown">
-              <li><%= link_to 'Your Games', games_path %></li>
-              <li><%= link_to 'Add New', new_game_path %></li>
-            </ul>
-
-            <a href="#" data-dropdown="characters" class="button expand">Characters</a><br>
-            <ul id="characters" data-dropdown-content class="f-dropdown">
-              <li><%= link_to 'Your Characters', characters_path %></li>
-              <li><%= link_to 'Add New', new_character_path %></li>
-            </ul>
-
-          <%- else -%>
-            <%= button_to 'Sign Up', new_user_registration_path, class: "button expand", method: :get, id: "sign_up_menu" %>
-            <%= button_to 'Sign In', new_user_session_path, class: "button expand", method: :get, id: "sign_in_menu" %>
-          <%- end -%>
-          <%= button_to 'Contact Us', contact_us_path, class: "button expand", method: :get %>
-        </nav>
+        </div>
       </div>
-      <div class="small-9 columns">
-        <% flash.each do |name, msg| %>
-          <% if msg.is_a?(String) %>
-            <div data-alert class="alert-box <%=
-              if name == :success
-                "success"
-              elsif name == :alert
-                "alert"
-              else
-                 nil
-              end %>">
-              <%= content_tag :div, msg %>
-              <a href="#" class="close">&times;</a>
-            </div>
-          <% end %>
-        <% end %>
+
+    <%- else -%>
+    <div class="row">
+      <div class="small-12 columns">
         <%= yield %>
       </div>
     </div>
+    <%- end -%>
+
     <div class="row">
-      <div class="small-8 small-offset-4 columns"><p>Living LARP is &copy; <%= DateTime.now.year %> Eben Lowe</p></div>
+      <div class="small-4 small-centered columns">
+        <p>Living LARP is &copy; <%= DateTime.now.year %> Eben Lowe</p>
+      </div>
     </div>
+
     <%= javascript_include_tag "application" %>
   </body>
 </html>
