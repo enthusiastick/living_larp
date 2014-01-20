@@ -20,7 +20,6 @@ class DagValidator < ActiveModel::Validator
         end
       end
     end
-    binding.pry
   end
 
   # def validate(record)
