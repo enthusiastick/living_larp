@@ -4,6 +4,8 @@ class CharactersController < ApplicationController
 
   def create
     @character = Character.new(character_params)
+    @games = Game.all.select { |g| g.user == current_user }
+    @player_games = Player.all.select { |p| p.user == current_user }
     @character.user = current_user
     @character.game = @character.player.game unless @character.player == nil
       if @character.save

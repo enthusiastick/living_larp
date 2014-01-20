@@ -4,6 +4,7 @@ class TraitsController < ApplicationController
 
   def create
     @character = Character.find(params[:character_id])
+    @traits_collection = @character.game.game_traits
     @trait = Trait.find_or_initialize_by(character: @character, game_trait_id: params[:trait][:game_trait_id])
     if @trait.id == nil
       @trait.purchases = params[:trait][:purchases]
