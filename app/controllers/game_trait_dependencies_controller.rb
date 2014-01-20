@@ -1,5 +1,7 @@
 class GameTraitDependenciesController < ApplicationController
 
+  before_action :authenticate_user, only: [:new, :create, :show]
+
   def create
     @game_trait_dependency = GameTraitDependency.new(game_trait_dependency_params)
     if @game_trait_dependency.save

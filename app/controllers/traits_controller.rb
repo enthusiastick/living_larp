@@ -1,6 +1,6 @@
 class TraitsController < ApplicationController
 
-  before_action :authenticate_user, only: :create
+  before_action :authenticate_user, only: [:new, :create, :show]
 
   def create
     @character = Character.find(params[:character_id])

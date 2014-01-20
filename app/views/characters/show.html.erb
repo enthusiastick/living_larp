@@ -1,5 +1,5 @@
 <%- if user_signed_in? -%>
-  <%- if current_user = @character.user -%>
+  <%- if current_user == @character.user -%>
     <ul class="breadcrumbs" >
       <li><%= link_to 'Characters', characters_path %></li>
       <li class="current"><%= link_to @character.name, character_path(@character) %></li>

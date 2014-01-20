@@ -1,6 +1,6 @@
 class CharactersController < ApplicationController
 
-  before_action :authenticate_user, only: [:new, :create]
+  before_action :authenticate_user, only: [:new, :create, :show]
 
   def create
     @character = Character.new(character_params)

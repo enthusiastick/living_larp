@@ -1,5 +1,7 @@
 class PlayersController < ApplicationController
 
+  before_action :authenticate_user, only: [:new, :create, :show]
+
   def create
     @player = Player.new(player_params)
     @player.points = 0

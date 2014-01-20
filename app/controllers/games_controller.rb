@@ -1,6 +1,6 @@
 class GamesController < ApplicationController
 
-  before_action :authenticate_user, only: [:new, :create]
+  before_action :authenticate_user, only: [:new, :create, :show]
 
   def create
     @game = Game.new(game_params)

@@ -19,10 +19,10 @@ feature "User adds traits to a character", %Q{
     character = FactoryGirl.create(:character, game: game, user: user)
     login(user)
     visit character_path(character)
-    click_on "Update Character"
+    click_button "Update Character"
     select(game_trait.name, from: "trait")
     fill_in "Purchases", with: "1"
-    click_on "Update Character"
+    click_button "Update Character"
 
     expect(page).to have_content("successfully")
     expect(page).to have_content(game.starting_points - game_trait.point_cost)
@@ -40,7 +40,7 @@ feature "User adds traits to a character", %Q{
     login(user)
     visit character_path(character)
     2.times do
-      click_on "Update Character"
+      click_button "Update Character"
     end
     expect(page).to have_content("check your input")
     expect(Trait.count).to eq(count)
@@ -54,10 +54,10 @@ feature "User adds traits to a character", %Q{
     character = FactoryGirl.create(:character, game: game, user: user)
     login(user)
     visit character_path(character)
-    click_on "Update Character"
+    click_button "Update Character"
     select(game_trait.name, from: "trait")
     fill_in "Purchases", with: "10"
-    click_on "Update Character"
+    click_button "Update Character"
 
     expect(page).to have_content("not enough")
     expect(Trait.count).to eq(count)
@@ -71,10 +71,10 @@ feature "User adds traits to a character", %Q{
     character = FactoryGirl.create(:character, game: game, user: user)
     login(user)
     visit character_path(character)
-    click_on "Update Character"
+    click_button "Update Character"
     select(game_trait.name, from: "trait")
     fill_in "Purchases", with: "1000"
-    click_on "Update Character"
+    click_button "Update Character"
 
     expect(page).to have_content("exceeds maximum purchases")
     expect(Trait.count).to eq(count)
