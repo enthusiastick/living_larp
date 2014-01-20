@@ -1,9 +1,13 @@
 <%- if user_signed_in? -%>
-  <h1>Create A New Game</h1>
+  <ul class="breadcrumbs">
+    <li><%= link_to 'Games', games_path %></li>
+    <li class="current"><%= link_to 'Add New Game', new_game_path %></li>
+  </ul>
+  <h3>Create A New Game</h3>
 
   <%= simple_form_for @game do |f| %>
     <%= f.input :name %>
     <%= f.input :starting_points %>
-    <%= f.button :submit %>
+    <%= f.button :submit, class: "button small" %>
   <% end %>
 <%- end -%>

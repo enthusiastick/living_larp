@@ -1,10 +1,14 @@
 <%- if user_signed_in? -%>
+  <ul class="breadcrumbs" >
+    <li><%= link_to 'Characters', characters_path %></li>
+    <li class="current"><%= link_to 'Add New Character', new_character_path %></li>
+  </ul>
   <h3>Create NPC</h3>
 
   <%= simple_form_for @character do |f| %>
     <%= f.input :name %>
     <%= f.association :game, collection: @games %>
-    <%= f.button :submit, "Create NPC" %>
+    <%= f.button :submit, "Create NPC", class: "button small" %>
   <% end %>
 
   <h3>Create Player Character</h3>
@@ -12,7 +16,7 @@
   <%= simple_form_for @character do |f| %>
     <%= f.input :name %>
     <%= f.association :player, collection: @player_games, label: 'Game' %>
-    <%= f.button :submit, "Create Player Character" %>
+    <%= f.button :submit, "Create Player Character", class: "button small" %>
   <% end %>
 <%- end -%>
 

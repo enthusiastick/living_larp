@@ -1,5 +1,10 @@
 <%- if user_signed_in? -%>
   <%- if current_user == @game.user -%>
+    <ul class="breadcrumbs">
+      <li><%= link_to 'Games', games_path %></li>
+      <li><%= link_to @game.name, game_path(@game) %></li>
+      <li class="current"><%= link_to 'Configure Traits', new_game_game_trait_path(@game) %></li>
+    </ul>
     <h2><%= @game.name %></h2>
     <p>Starting Points: <%= @game.starting_points %></p>
     <%- unless @game.game_traits == [] -%>
@@ -36,7 +41,7 @@
       <%= f.input :max_purchases %>
       <%= f.input :bgs, label: "Downtime Trait?" %>
       <%= f.input :point_cost, required: true %>
-      <%= f.button :submit, "Add Trait" %>
+      <%= f.button :submit, "Add Trait", class: "button small" %>
     <% end %>
   <%- end -%>
 <%- end -%>

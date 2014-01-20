@@ -1,4 +1,10 @@
 <%- if user_signed_in? -%>
+  <ul class="breadcrumbs">
+      <li><%= link_to 'Games', games_path %></li>
+      <li><%= link_to Game.find(params[:game_id]).name, game_path(Game.find(params[:game_id])) %></li>
+      <li><%= link_to 'Manage Players', game_players_path(Game.find(params[:game_id])) %></li>
+      <li class="current"><%= link_to @player.user.email, game_player_path(Game.find(params[:game_id]), @player) %></li>
+  </ul>
   <h3><%= @player.game.name %> Player</h3>
   <h5><%= @player.user.email %></h3>
     <p>Available Points: <%= @player.points %><p>

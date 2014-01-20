@@ -1,9 +1,15 @@
 <%- if user_signed_in? -%>
+  <%- if current_user == @game.user -%>
+    <ul class="breadcrumbs">
+      <li><%= link_to 'Games', games_path %></li>
+      <li><%= link_to @game.name, game_path(@game) %></li>
+      <li class="current"><%= link_to 'Set Prerequisite', new_game_game_trait_dependency_path(@game) %></li>
+    </ul>
 
-<%= simple_form_for [@game, @game_trait_dependency] do |f| %>
-  <%= f.association :parent_trait, collection: @game.game_traits %>
-  <%= f.association :child_trait, collection: @game.game_traits %>
-  <%= f.button :submit, 'Set Prerequisite' %>
-<% end %>
-
+    <%= simple_form_for [@game, @game_trait_dependency] do |f| %>
+      <%= f.association :parent_trait, collection: @game.game_traits %>
+      <%= f.association :child_trait, collection: @game.game_traits %>
+      <%= f.button :submit, 'Set Prerequisite' %>
+    <% end %>
+  <%- end -%>
 <%- end -%>

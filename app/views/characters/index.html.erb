@@ -1,4 +1,7 @@
 <%- if user_signed_in? -%>
+  <ul class="breadcrumbs">
+    <li class="current"><%= link_to 'Characters', characters_path %></li>
+  </ul>
   <div>
     <h5>My characters:</h5>
     <table width=100%>
@@ -18,5 +21,6 @@
       </tbody>
     </table>
   </div>
+  <%= button_to 'Create A Character', new_character_path, method: :get, class: 'button small' %>
 <%- end -%>
 
