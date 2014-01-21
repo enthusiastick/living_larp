@@ -16,7 +16,7 @@ feature "User views characters index", %Q{
     login(user)
     visit characters_path
 
-    expect(page).to have_content("Add New Character")
+    expect(page).to have_button("Create A Character")
   end
 
   scenario "with characters only created by user" do

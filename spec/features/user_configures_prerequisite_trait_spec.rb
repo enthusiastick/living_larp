@@ -22,7 +22,7 @@ feature "User configures a prerequisite trait", %Q{
     click_on "Set Prerequisite"
     select(game_trait2.name, from: "Child")
     select(game_trait1.name, from: "Parent")
-    click_on "Set"
+    click_button "Set"
 
     expect(page).to have_content("successfully")
     expect(GameTraitDependency.count).to eq(count + 1)

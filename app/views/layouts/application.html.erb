@@ -81,6 +81,21 @@
     <%- else -%>
     <div class="row">
       <div class="small-12 columns">
+        <% flash.each do |name, msg| %>
+          <% if msg.is_a?(String) %>
+            <div data-alert class="alert-box <%=
+              if name == :success
+                "success"
+              elsif name == :alert
+                "alert"
+              else
+                 nil
+              end %>">
+              <%= content_tag :div, msg %>
+              <a href="#" class="close">&times;</a>
+            </div>
+          <% end %>
+        <% end %>
         <%= yield %>
       </div>
     </div>

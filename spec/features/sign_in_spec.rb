@@ -22,7 +22,7 @@ feature "User signs in", %Q{
 
     click_button 'sign_in_session'
     expect(page).to have_content('Welcome')
-    expect(page).to have_button('Sign Out')
+    expect(page).to have_link('Sign Out')
   end
 
   scenario 'an unregistered user signs in' do
@@ -59,7 +59,7 @@ feature "User signs in", %Q{
     user.save
 
     click_button 'sign_in_session'
-    expect(page).to have_button('Sign Out')
+    expect(page).to have_link('Sign Out')
     expect(page).to_not have_button('Sign In')
 
     visit new_user_session_path
