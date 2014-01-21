@@ -14,4 +14,8 @@ class User < ActiveRecord::Base
     self.email
   end
 
+  def admin?
+    self.frood_on != nil && self.frood_on < DateTime.now
+  end
+
 end

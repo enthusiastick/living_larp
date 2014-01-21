@@ -37,6 +37,8 @@ gem 'devise'
 gem 'mail_form'
 gem 'foundation-rails'
 gem 'fastclick-rails'
+gem 'rails_admin'
+gem 'cancan'
 
 group :test, :development do
   gem 'rspec-rails'

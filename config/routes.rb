@@ -1,5 +1,7 @@
 LivingLarp::Application.routes.draw do
 
+  mount RailsAdmin::Engine => '/frood', :as => 'rails_admin'
+
   root 'pages#index'
 
   devise_for :users
