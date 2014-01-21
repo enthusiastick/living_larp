@@ -45,7 +45,8 @@
   <%- if current_user == @game.user -%>
     <ul class="inline-list">
       <li><%= button_to 'Configure Traits', new_game_game_trait_path(@game), method: :get, class: 'button small' %></li>
-      <li><%= button_to 'Set Prerequisite', new_game_game_trait_dependency_path(@game), method: :get, class: 'button small' %>
+      <li><%= button_to 'Set Prerequisite', new_game_game_trait_dependency_path(@game), method: :get, class: 'button small' %></li>
+      <li><%= button_to 'View Characters', '/games/player_characters/' + @game.id.to_s, method: :get, class: 'button small' %></li>
       <li><%= button_to 'Manage Players', game_players_path(@game), method: :get, class: 'button small' %></li>
     </ul>
   <%- end -%>

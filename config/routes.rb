@@ -10,12 +10,14 @@ LivingLarp::Application.routes.draw do
 
   resources :games, only: [:create, :index, :new, :show] do
     resources :game_traits, only: [:create, :index, :new, :show]
-    resources :players, only: [:create, :index, :new, :show, :update]
     resources :game_trait_dependencies, only: [:create, :new, :index, :show]
+    resources :players, only: [:create, :index, :new, :show, :update]
   end
 
   resources :characters, only: [:create, :index, :new, :show, :update] do
     resources :traits, only: [:create, :new, :show]
   end
+
+  get ':controller/:action/:game_id', as: :player_characters
 
 end

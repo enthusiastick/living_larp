@@ -22,6 +22,11 @@ class GamesController < ApplicationController
     @game = Game.new
   end
 
+  def player_characters
+    @game = Game.find(params[:game_id])
+    @characters = @game.characters.order(:name)
+  end
+
   def show
     @game = Game.find(params[:id])
     if current_user == nil || @game.user != current_user

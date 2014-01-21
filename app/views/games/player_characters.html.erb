@@ -1,0 +1,43 @@
+<%- if user_signed_in? -%>
+  <%- if current_user == @game.user -%>
+  <ul class="breadcrumbs">
+    <li><%= link_to 'Games', games_path %></li>
+    <li><%= link_to @game.name, game_path(@game) %></li>
+    <li class="current"><%= link_to 'View Characters', '/games/player_characters/' + @game.id.to_s %></li>
+  </ul>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Player
+        </th>
+        <th>
+          Total Points
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @characters.each do |character| %>
+      <tr>
+        <td>
+          <%= link_to character.name, character_path(character) %>
+        </td>
+        <td>
+          <%- if character.player != nil -%>
+            <%= link_to character.user.email, game_player_path(@game, character.player) %>
+          <%- else -%>
+            <%= link_to character.user.email, characters_path %>
+          <%- end -%>
+        </td>
+        <td>
+          <%= character.spent %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+  <%- end -%>
+<%- end -%>

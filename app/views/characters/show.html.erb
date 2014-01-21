@@ -5,13 +5,25 @@
       <li class="current"><%= link_to @character.name, character_path(@character) %></li>
     </ul>
   <%- elsif current_user == @character.game.user -%>
-    <ul class="breadcrumbs">
+  <ul class="inline-list">
+    <li>
+      <ul class="breadcrumbs">
+        <li><%= link_to 'Games', games_path %></li>
+        <li><%= link_to @character.game.name, game_path(@character.game) %></li>
+        <li><%= link_to 'View Characters', '/games/player_characters/' + @character.game.id.to_s %></li>
+        <li class="current"><%= link_to @character.name, character_path(@character) %></li>
+      </ul>
+    </li>
+    <li>
+      <ul class="breadcrumbs">
         <li><%= link_to 'Games', games_path %></li>
         <li><%= link_to @character.game.name, game_path(@character.game) %></li>
         <li><%= link_to 'Manage Players', game_players_path(@character.game) %></li>
         <li><%= link_to @character.user.email, game_player_path(@character.game, @character.player) %></li>
         <li class="current"><%= link_to @character.name, character_path(@character) %></li>
-    </ul>
+      </ul>
+    </li>
+  </ul>
   <%- end -%>
 
   <h2><%= @character.name %></h2>
