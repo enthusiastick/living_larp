@@ -5,6 +5,7 @@ class GameTraitsController < ApplicationController
   def create
     @game = Game.find(params[:game_id])
     @game_trait = GameTrait.new(game_trait_params)
+    @game_traits = @game.game_traits.order(:name)
     @game_trait.game = @game
     if @game_trait.save
       flash[:success] = "Trait added successfully."
