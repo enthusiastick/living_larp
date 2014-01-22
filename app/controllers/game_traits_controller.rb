@@ -19,6 +19,11 @@ class GameTraitsController < ApplicationController
   def new
     @game = Game.find(params[:game_id])
     @game_trait = GameTrait.new
+    if @game.game_traits == nil
+      @game_traits = []
+    else
+      @game_traits = @game.game_traits.order(:name)
+    end
   end
 
   def show
@@ -28,9 +33,10 @@ class GameTraitsController < ApplicationController
 
   def update
     @game_trait = GameTrait.find(params[:id])
+    @game = @game_trait.game
     if @game_trait.update(game_trait_params)
-      flash[:succcess] = "#{@game_trait.name} updated successfully."
-      redirect_to game_path(@game_trait.game)
+      flash[:succcess] = "\'#{@game_trait.name}\' updated successfully."
+      redirect_to new_game_game_trait_path(@game)
     else
       flash.now[:alert] = "Error! Unable to update trait."
       render 'show'
