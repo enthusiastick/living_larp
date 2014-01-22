@@ -33,8 +33,8 @@
           <td><%= trait.point_cost %></td>
           <td>
             <%- unless trait.parent_traits == nil -%>
-              <%- trait.parent_traits.each do |trait| -%>
-                <%= trait.name %>&nbsp;<i class="foundicon-remove"></i>&nbsp;
+              <%- trait.parent_traits.each do |parent| -%>
+                <%= parent.name %>&nbsp;<%= link_to(game_game_trait_path(@game, parent)) do %><i class="foundicon-remove"> </i><% end %>&nbsp;
               <%- end -%>
             <%- end -%>
           </td>
