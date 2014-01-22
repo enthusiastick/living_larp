@@ -30,16 +30,17 @@ feature "User configures a game", %Q{
     expect(GameTrait.last).to eq(game_trait)
   end
 
-  # scenario "no specified info" do
-  #   count = GameTrait.count
-  #   user = FactoryGirl.create(:user)
-  #   game = FactoryGirl.create(:game, user: user)
-  #   login(user)
-  #   visit new_game_game_trait_path(game)
-  #   click_on "Add Trait"
+  scenario "invalid input" do
+    user = FactoryGirl.create(:user)
+    game = FactoryGirl.create(:game, user: user)
+    game_trait = FactoryGirl.create(:game_trait, game: game)
+    login(user)
+    visit game_game_trait_path(game, game_trait)
+    fill_in "Name", with: ""
+    fill_in "Point", with: ""
+    click_on "Update Trait"
 
-  #   expect(page).to have_content("Error")
-  #   expect(GameTrait.count).to eq(count)
-  # end
+    expect(page).to have_content("Error")
+  end
 
 end
