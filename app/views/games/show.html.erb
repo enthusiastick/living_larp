@@ -5,7 +5,7 @@
   </ul>
   <h2><%= @game.name %></h2>
   <p>Starting Points: <%= @game.starting_points %></p>
-  <%- unless @game.game_traits == [] -%>
+  <%- unless @game_traits == [] -%>
     <table width=100%>
       <thead>
         <tr>
@@ -17,7 +17,7 @@
         </tr>
       </thead>
       <tbody>
-      <%- @game.game_traits.each do |trait| -%>
+      <%- @game_traits.each do |trait| -%>
       <tr>
         <td><%= trait.name %></td>
         <td><%= trait.max_purchases unless trait.max_purchases == nil%></td>

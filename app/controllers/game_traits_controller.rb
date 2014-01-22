@@ -19,11 +19,7 @@ class GameTraitsController < ApplicationController
   def new
     @game = Game.find(params[:game_id])
     @game_trait = GameTrait.new
-    if @game.game_traits == nil
-      @game_traits = []
-    else
-      @game_traits = @game.game_traits.order(:name)
-    end
+    @game_traits = @game.game_traits.order(:name)
   end
 
   def show

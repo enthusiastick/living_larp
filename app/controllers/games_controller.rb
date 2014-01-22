@@ -29,6 +29,7 @@ class GamesController < ApplicationController
 
   def show
     @game = Game.find(params[:id])
+    @game_traits = @game.game_traits.order(:name)
     if current_user == nil || @game.user != current_user
       raise ActionController::RoutingError.new('Not Found')
     end
