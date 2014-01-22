@@ -5,12 +5,21 @@ class PlayersController < ApplicationController
   def create
     @player = Player.new(player_params)
     @player.points = 0
-    if @player.save
-      flash[:success] = "Player added successfully."
+    if params[:player][:user_id] == current_user.id.to_s
+      if @player.save
+        flash[:success] = "Game joined successfully."
+      else
+        flash[:alert] = "Error! unable to join game."
+      end
+      redirect_to new_character_path
     else
-      flash[:alert] = "Error! Unable to add player."
+      if @player.save
+        flash[:success] = "Player added successfully."
+      else
+        flash[:alert] = "Error! Unable to add player."
+      end
+      redirect_to game_players_path(@player.game)
     end
-    redirect_to game_players_path(@player.game)
   end
 
   def index
@@ -20,13 +29,18 @@ class PlayersController < ApplicationController
 
   def new
     @game = Game.find(params[:game_id])
-    user_search = User.find_by email:(params[:email])
-    if user_search == nil
-      flash[:alert] = "User not found."
-      redirect_to game_players_path(@game)
-    else
+    if params[:email] == nil
       @player = Player.new
-      @user = user_search
+      @user = current_user
+    else
+      user_search = User.find_by email:(params[:email])
+      if user_search == nil
+        flash[:alert] = "User not found."
+        redirect_to game_players_path(@game)
+      else
+        @player = Player.new
+        @user = user_search
+      end
     end
   end
 

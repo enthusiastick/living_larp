@@ -19,6 +19,9 @@
     </ul>
   <%- else -%>
     <p><%= @game.description %></p>
+
+    <%= button_to 'Join Game', new_game_player_path(@game), method: :get, class: 'button' %>
+
   <%- end -%>
 
 <%- end -%>

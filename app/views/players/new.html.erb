@@ -1,19 +1,26 @@
 <%- if user_signed_in? -%>
+  <ul class="breadcrumbs">
+    <li><%= link_to 'Games', games_path %></li>
+    <li><%= link_to @game.name, game_path(@game) %></li>
   <%- if current_user == @game.user -%>
-    <ul class="breadcrumbs">
-      <li><%= link_to 'Games', games_path %></li>
-      <li><%= link_to @game.name, game_path(@game) %></li>
       <li><%= link_to 'Manage Players', game_players_path(@game) %></li>
       <li class="current"><%= link_to 'Add Player', '#' %></li>
     </ul>
 
     <h3>Add Player</h3>
 
-    <%= simple_form_for [@game, @player] do |f| %>
-      <%= f.input :user_id, collection: [@user], include_blank: false %>
-      <%= f.input :game_id, collection: [@game], include_blank: false %>
-      <%= f.button :submit, 'Confirm' %>
-    <% end %>
+  <%- else -%>
+      <li class="current"><%= link_to 'Join Game', '#' %></li>
+    </ul>
+
+    <h3>Join Game</h3>
 
   <%- end -%>
+
+  <%= simple_form_for [@game, @player] do |f| %>
+    <%= f.input :user_id, collection: [@user], include_blank: false %>
+    <%= f.input :game_id, collection: [@game], include_blank: false %>
+    <%= f.button :submit, 'Confirm' %>
+  <% end %>
+
 <%- end -%>
