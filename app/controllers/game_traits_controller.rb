@@ -21,10 +21,26 @@ class GameTraitsController < ApplicationController
     @game_trait = GameTrait.new
   end
 
+  def show
+    @game_trait = GameTrait.find(params[:id])
+    @game = @game_trait.game
+  end
+
+  def update
+    @game_trait = GameTrait.find(params[:id])
+    if @game_trait.update(game_trait_params)
+      flash[:succcess] = "#{@game_trait.name} updated successfully."
+      redirect_to game_path(@game_trait.game)
+    else
+      flash.now[:alert] = "Error! Unable to update trait."
+      render 'show'
+    end
+  end
+
   protected
 
   def game_trait_params
-    params.require(:game_trait).permit(:name, :max_purchases, :bgs, :point_cost, :game_id, :game_trait_id)
+    params.require(:game_trait).permit(:name, :max_purchases, :bgs, :point_cost, :game)
   end
 
 end
