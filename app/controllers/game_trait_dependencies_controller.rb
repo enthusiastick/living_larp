@@ -12,6 +12,17 @@ class GameTraitDependenciesController < ApplicationController
     redirect_to game_path(Game.find(params[:game_id]))
   end
 
+  def destroy
+    @game_trait_dependency = GameTraitDependency.find(params[:id])
+    @game = @game_trait_dependency.parent_trait.game
+    if @game_trait_dependency.destroy
+      flash[:success] = "Prerequisite removed successfully."
+    else
+      flash[:error] = "Error! Unable to remove prerequisite."
+    end
+    redirect_to new_game_game_trait_path(@game)
+  end
+
   def new
     @game = Game.find(params[:game_id])
     @game_trait_dependency = GameTraitDependency.new

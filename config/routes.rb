@@ -12,7 +12,7 @@ LivingLarp::Application.routes.draw do
 
   resources :games, only: [:create, :index, :new, :show] do
     resources :game_traits, only: [:create, :index, :new, :show, :update]
-    resources :game_trait_dependencies, only: [:create, :new, :index, :show]
+    resources :game_trait_dependencies, only: [:create, :destroy, :new, :index, :show]
     resources :players, only: [:create, :index, :new, :show, :update]
   end
 
