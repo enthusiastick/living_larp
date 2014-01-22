@@ -30,12 +30,24 @@ class GamesController < ApplicationController
   def show
     @game = Game.find(params[:id])
     @game_traits = @game.game_traits.order(:name)
-    if current_user == nil || @game.user != current_user
-      raise ActionController::RoutingError.new('Not Found')
+  end
+
+  def update
+    @game = Game.find(params[:id])
+    if @game.update(desc_params)
+      flash[:success] = "Game description updated successfully."
+      redirect_to game_path(@game)
+    else
+      flash.now[:alert] = "Error! Unable to update game description."
+      render 'show'
     end
   end
 
   protected
+
+  def desc_params
+    params.require(:game).permit(:description)
+  end
 
   def game_params
     params.require(:game).permit(:name, :starting_points)

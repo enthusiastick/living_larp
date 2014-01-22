@@ -9,7 +9,7 @@ feature "User views a game", %Q{
   # Acceptance Criteria:
   # * The game's name and starting points must be displayed
   # * If I am not logged in, I cannot view the game
-  # * If I am logged in, I cannot view a game belonging to another user
+  # * If I am logged in, I cannot edit a game belonging to another user
 
   scenario "not logged in" do
     game = FactoryGirl.create(:game)
@@ -22,7 +22,10 @@ feature "User views a game", %Q{
     game = FactoryGirl.create(:game)
     login(user)
 
-    expect { visit game_path(game) }.to raise_error(ActionController::RoutingError)
+    expect(page).to_not have_button('Update')
+    expect(page).to_not have_button('Configure')
+    expect(page).to_not have_button('Set')
+    expect(page).to_not have_button('Manage')
   end
 
   scenario "logged in, my game" do

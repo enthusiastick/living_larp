@@ -5,50 +5,20 @@
   </ul>
   <h2><%= @game.name %></h2>
   <p>Starting Points: <%= @game.starting_points %></p>
-  <%- unless @game_traits == [] -%>
-    <table width=100%>
-      <thead>
-        <tr>
-          <th>Trait</th>
-          <th>Max Purchases</th>
-          <th>Downtime</th>
-          <th>Cost</th>
-          <th>Prerequisite(s)</th>
-        </tr>
-      </thead>
-      <tbody>
-      <%- @game_traits.each do |trait| -%>
-      <tr>
-        <td><%= trait.name %></td>
-        <td><%= trait.max_purchases unless trait.max_purchases == nil%></td>
-        <td>
-          <%- if trait.bgs -%>
-            Yes
-          <%- else -%>
-            No
-          <%- end -%>
-        </td>
-        <td><%= trait.point_cost %></td>
-        <td>
-          <%- unless trait.parent_traits == nil -%>
-            <%- trait.parent_traits.each do |trait| -%>
-              <%= trait.name %>&nbsp;
-            <%- end -%>
-          <%- end -%>
-        </td>
-      </tr>
-      <%- end -%>
-      </tbody>
-    </table>
-  <%- end -%>
 
   <%- if current_user == @game.user -%>
-    <ul class="inline-list">
+    <%= simple_form_for @game do |f| %>
+      <%= f.input :description, placeholder: '[Example Description] Set in a far-off land of eldritch mystery, our story transpires in a small town on the edge of nowhere. With a population of proud heroes and secret villains, everyday politics conceal deeper machinations, and the fate of the world may hang in the balance.' %>
+      <ul class="inline-list">
+        <li><%= f.button :submit, 'Update Description', class: 'button small' %></li>
+      <% end %>
       <li><%= button_to 'Configure Traits', new_game_game_trait_path(@game), method: :get, class: 'button small' %></li>
       <li><%= button_to 'Set Prerequisite', new_game_game_trait_dependency_path(@game), method: :get, class: 'button small' %></li>
       <li><%= button_to 'View Characters', '/games/player_characters/' + @game.id.to_s, method: :get, class: 'button small' %></li>
       <li><%= button_to 'Manage Players', game_players_path(@game), method: :get, class: 'button small' %></li>
     </ul>
+  <%- else -%>
+    <p><%= @game.description %></p>
   <%- end -%>
 
 <%- end -%>

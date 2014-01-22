@@ -10,7 +10,7 @@ LivingLarp::Application.routes.draw do
 
   get '/contact_us', to: 'contacts#new'
 
-  resources :games, only: [:create, :index, :new, :show] do
+  resources :games, only: [:create, :index, :new, :show, :update] do
     resources :game_traits, only: [:create, :index, :new, :show, :update]
     resources :game_trait_dependencies, only: [:create, :destroy, :new, :index, :show]
     resources :players, only: [:create, :index, :new, :show, :update]
