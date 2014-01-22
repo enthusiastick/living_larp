@@ -32,7 +32,7 @@ class GameTraitsController < ApplicationController
     @game_trait = GameTrait.find(params[:id])
     @game = @game_trait.game
     if @game_trait.update(game_trait_params)
-      flash[:succcess] = "\'#{@game_trait.name}\' updated successfully."
+      flash[:success] = "\'#{@game_trait.name}\' updated successfully."
       redirect_to new_game_game_trait_path(@game)
     else
       flash.now[:alert] = "Error! Unable to update trait."

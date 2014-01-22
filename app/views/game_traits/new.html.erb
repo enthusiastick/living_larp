@@ -21,7 +21,7 @@
         <tbody>
         <%- @game_traits.each do |trait| -%>
         <tr>
-          <td><%= trait.name %></td>
+          <td><%= link_to trait.name, game_game_trait_path(@game, trait) %></td>
           <td><%= trait.max_purchases unless trait.max_purchases == nil%></td>
           <td>
             <%- if trait.bgs -%>
