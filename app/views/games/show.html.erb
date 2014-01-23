@@ -1,31 +1,34 @@
-<%- if user_signed_in? -%>
+<%- unless current_user == nil -%>
   <ul class="breadcrumbs">
     <li><%= link_to 'Games', games_path %></li>
     <li class="current"><%= link_to @game.name, game_path(@game) %></li>
   </ul>
-  <h2><%= @game.name %></h2>
-  <p>Starting Points: <%= @game.starting_points %></p>
+<%- end -%>
+<h2><%= @game.name %></h2>
+<p>Starting Points: <%= @game.starting_points %></p>
 
-  <%- if current_user == @game.user -%>
-    <%= simple_form_for @game do |f| %>
-      <%= f.input :description, placeholder: '[Example Description] Set in a far-off land of eldritch mystery, our story transpires in a small town on the edge of nowhere. With a population of proud heroes and secret villains, everyday politics conceal deeper machinations, and the fate of the world may hang in the balance.' %>
-      <ul class="inline-list">
-        <li><%= f.button :submit, 'Update Description', class: 'button small' %></li>
-      <% end %>
-      <li><%= button_to 'Configure Traits', new_game_game_trait_path(@game), method: :get, class: 'button small' %></li>
-      <li><%= button_to 'Set Prerequisite', new_game_game_trait_dependency_path(@game), method: :get, class: 'button small' %></li>
-      <li><%= button_to 'View Characters', '/games/player_characters/' + @game.id.to_s, method: :get, class: 'button small' %></li>
-      <li><%= button_to 'Manage Players', game_players_path(@game), method: :get, class: 'button small' %></li>
-    </ul>
+<%- if current_user == @game.user -%>
+  <%= simple_form_for @game do |f| %>
+    <%= f.input :description, placeholder: '[Example Description] Set in a far-off land of eldritch mystery, our story transpires in a small town on the edge of nowhere. With a population of proud heroes and secret villains, everyday politics conceal deeper machinations, and the fate of the world may hang in the balance.' %>
+    <ul class="inline-list">
+      <li><%= f.button :submit, 'Update Description', class: 'button small' %></li>
+    <% end %>
+    <li><%= button_to 'Configure Traits', new_game_game_trait_path(@game), method: :get, class: 'button small' %></li>
+    <li><%= button_to 'Set Prerequisite', new_game_game_trait_dependency_path(@game), method: :get, class: 'button small' %></li>
+    <li><%= button_to 'View Characters', '/games/player_characters/' + @game.id.to_s, method: :get, class: 'button small' %></li>
+    <li><%= button_to 'Manage Players', game_players_path(@game), method: :get, class: 'button small' %></li>
+  </ul>
+<%- else -%>
+  <p><%= @game.description %></p>
+
+  <%- if current_user == nil %>
+    <ul class="inline-list">
+    <li><%= button_to 'Sign Up', new_user_registration_path, class: "button", method: :get, id: "sign_up_menu" %></li>
+    <li><%= button_to 'Sign In', new_user_session_path, class: "button", method: :get, id: "sign_in_menu" %></li>
+  </ul>
+  <%- elsif current_user.has_a_player_in?(@game) -%>
   <%- else -%>
-    <p><%= @game.description %></p>
-
-    <%- unless current_user.has_a_player_in?(@game) -%>
-
-      <%= button_to 'Join Game', new_game_player_path(@game), method: :get, class: 'button' %>
-
-    <%- end -%>
-
+    <%= button_to 'Join Game', new_game_player_path(@game), method: :get, class: 'button' %>
   <%- end -%>
 
 <%- end -%>
