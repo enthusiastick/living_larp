@@ -60,15 +60,15 @@
 
                   <aside class="left-off-canvas-menu">
                     <ul class="off-canvas-list">
-                      <li><label>User</label></li>
+                      <li class="janet">User</li>
                       <li><%= link_to 'Sign Out', destroy_user_session_path %></li>
-                      <li><label>Characters</label></li>
+                      <h2>Characters</h2>
                       <li><%= link_to 'Your Characters', characters_path %></li>
                       <li><%= link_to 'Add New', new_character_path %></li>
-                      <li><label>Games</label></li>
+                      <h2>Games</h2>
                       <li><%= link_to 'Your Games', games_path %></li>
                       <li><%= link_to 'Add New', new_game_path %></li>
-                      <li><label>Site</label></li>
+                      <h2>Site</h2>
                       <li><%= link_to 'Contact Us', contact_us_path %></li>
                     </ul>
                   </aside>
