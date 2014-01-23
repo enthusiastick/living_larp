@@ -8,11 +8,36 @@
 
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "vendor/modernizr" %>
+    <%= javascript_include_tag "modernizr.custom.js" %>
     <%= csrf_meta_tags %>
   </head>
 
   <body>
-    <div class="row">
+
+    <div id="st-container" class="st-container">
+      <!--
+        example menus
+        these menus will be on top of the push wrapper
+      -->
+      <nav class="st-menu st-effect-1" id="menu-1">
+        <h2>Menu</h2>
+        <ul>
+                  <h5>User</h5>
+                  <li><%= link_to 'Sign Out', destroy_user_session_path %></li>
+                  <h5>Characters</h5>
+                  <li><%= link_to 'Your Characters', characters_path %></li>
+                  <li><%= link_to 'Add New', new_character_path %></li>
+                  <h5>Games</h5>
+                  <li><%= link_to 'Your Games', games_path %></li>
+                  <li><%= link_to 'Add New', new_game_path %></li>
+                  <h5>Site</h5>
+                  <li><%= link_to 'Contact Us', contact_us_path %></li>
+        </ul>
+      </nav>
+
+        <div class="st-content"><!-- this is the wrapper for the content -->
+
+                <div class="row">
       <div class="small-12 columns">
         <h1><%= link_to 'Living LARP', root_path %> <span class="tiny">pre-alpha</span></h1>
       </div>
@@ -27,7 +52,9 @@
             <div class="inner-wrap">
               <nav class="tab-bar">
                 <section class="left-small">
-                  <a class="left-off-canvas-toggle menu-icon" ><span></span></a>
+                  <div id="st-trigger-effects" class="column">
+                  <button data-effect="st-effect-1">Slide in on top</button>
+                </div>
                 </section>
 
                 <section class="middle tab-bar-section">
@@ -106,6 +133,16 @@
         <p>Living LARP is &copy; <%= DateTime.now.year %> Eben Lowe</p>
       </div>
     </div>
+
+
+
+
+
+            </div><!-- /main -->
+          </div><!-- /st-content-inner -->
+        </div><!-- /st-content -->
+      </div><!-- /st-pusher -->
+    </div><!-- /st-container -->
 
     <%= javascript_include_tag "application" %>
   </body>
