@@ -18,15 +18,15 @@
 
       <nav class="st-menu st-effect-1" id="menu-1">
         <ul>
-          <li><label>User</label></li>
+          <li class="piece">User</li>
           <li><%= link_to 'Sign Out', destroy_user_session_path %></li>
-          <li><label>Characters</label></li>
+          <li class="piece">Characters</li>
           <li><%= link_to 'Your Characters', characters_path %></li>
           <li><%= link_to 'Add New', new_character_path %></li>
-          <li><label>Games</label></li>
+          <li class="piece">Games</li>
           <li><%= link_to 'Your Games', games_path %></li>
           <li><%= link_to 'Add New', new_game_path %></li>
-          <li><label>Site</label></li>
+          <li class="piece">Site</li>
           <li><%= link_to 'Contact Us', contact_us_path %></li>
         </ul>
       </nav>
@@ -57,21 +57,6 @@
                       <p class="usertag"><%= current_user.email %></p>
                     </section>
                   </nav>
-
-                  <aside class="left-off-canvas-menu">
-                    <ul class="off-canvas-list">
-                      <li class="janet">User</li>
-                      <li><%= link_to 'Sign Out', destroy_user_session_path %></li>
-                      <h2>Characters</h2>
-                      <li><%= link_to 'Your Characters', characters_path %></li>
-                      <li><%= link_to 'Add New', new_character_path %></li>
-                      <h2>Games</h2>
-                      <li><%= link_to 'Your Games', games_path %></li>
-                      <li><%= link_to 'Add New', new_game_path %></li>
-                      <h2>Site</h2>
-                      <li><%= link_to 'Contact Us', contact_us_path %></li>
-                    </ul>
-                  </aside>
 
                   <div class="small-11 small-centered columns" >
                     <section class="main-section">
