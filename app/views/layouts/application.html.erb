@@ -15,133 +15,123 @@
   <body>
 
     <div id="st-container" class="st-container">
-      <!--
-        example menus
-        these menus will be on top of the push wrapper
-      -->
+
       <nav class="st-menu st-effect-1" id="menu-1">
-        <h2>Menu</h2>
         <ul>
-                  <h5>User</h5>
-                  <li><%= link_to 'Sign Out', destroy_user_session_path %></li>
-                  <h5>Characters</h5>
-                  <li><%= link_to 'Your Characters', characters_path %></li>
-                  <li><%= link_to 'Add New', new_character_path %></li>
-                  <h5>Games</h5>
-                  <li><%= link_to 'Your Games', games_path %></li>
-                  <li><%= link_to 'Add New', new_game_path %></li>
-                  <h5>Site</h5>
-                  <li><%= link_to 'Contact Us', contact_us_path %></li>
+          <li><label>User</label></li>
+          <li><%= link_to 'Sign Out', destroy_user_session_path %></li>
+          <li><label>Characters</label></li>
+          <li><%= link_to 'Your Characters', characters_path %></li>
+          <li><%= link_to 'Add New', new_character_path %></li>
+          <li><label>Games</label></li>
+          <li><%= link_to 'Your Games', games_path %></li>
+          <li><%= link_to 'Add New', new_game_path %></li>
+          <li><label>Site</label></li>
+          <li><%= link_to 'Contact Us', contact_us_path %></li>
         </ul>
       </nav>
 
-        <div class="st-content"><!-- this is the wrapper for the content -->
+      <div class="st-content"><!-- this is the wrapper for the content -->
 
-                <div class="row">
-      <div class="small-12 columns">
-        <h1><%= link_to 'Living LARP', root_path %> <span class="tiny">pre-alpha</span></h1>
-      </div>
-    </div>
+        <div class="row">
+          <div class="small-12 columns">
+            <h1><%= link_to 'Living LARP', root_path %> <span class="tiny">pre-alpha</span></h1>
+          </div>
+        </div>
 
-    <%- if user_signed_in? -%>
+        <%- if user_signed_in? -%>
 
-      <div class="row">
-        <div class="small-12 columns">
+          <div class="row">
+            <div class="small-12 columns">
 
-          <div class="off-canvas-wrap">
-            <div class="inner-wrap">
-              <nav class="tab-bar">
-                <section class="left-small">
-                  <div id="st-trigger-effects" class="column">
-                  <button data-effect="st-effect-1">Slide in on top</button>
+              <div class="off-canvas-wrap">
+                <div class="inner-wrap">
+                  <nav class="tab-bar">
+                    <section class="left-small">
+                      <div id="st-trigger-effects" class="column">
+                        <button data-effect="st-effect-1" class="button small" ></button>
+                    </div>
+                    </section>
+
+                    <section class="middle tab-bar-section">
+                      <p class="usertag"><%= current_user.email %></p>
+                    </section>
+                  </nav>
+
+                  <aside class="left-off-canvas-menu">
+                    <ul class="off-canvas-list">
+                      <li><label>User</label></li>
+                      <li><%= link_to 'Sign Out', destroy_user_session_path %></li>
+                      <li><label>Characters</label></li>
+                      <li><%= link_to 'Your Characters', characters_path %></li>
+                      <li><%= link_to 'Add New', new_character_path %></li>
+                      <li><label>Games</label></li>
+                      <li><%= link_to 'Your Games', games_path %></li>
+                      <li><%= link_to 'Add New', new_game_path %></li>
+                      <li><label>Site</label></li>
+                      <li><%= link_to 'Contact Us', contact_us_path %></li>
+                    </ul>
+                  </aside>
+
+                  <div class="small-11 small-centered columns" >
+                    <section class="main-section">
+                      <% flash.each do |name, msg| %>
+                        <% if msg.is_a?(String) %>
+                          <div data-alert class="alert-box <%=
+                            if name == :success
+                              "success"
+                            elsif name == :alert
+                              "alert"
+                            else
+                               nil
+                            end %>">
+                            <%= content_tag :div, msg %>
+                            <a href="#" class="close">&times;</a>
+                          </div>
+                        <% end %>
+                      <% end %>
+                      <%= yield %>
+                    </section>
+                  </div>
+
+                  <a class="exit-off-canvas"></a>
                 </div>
-                </section>
-
-                <section class="middle tab-bar-section">
-                  <p class="usertag"><%= current_user.email %></p>
-                </section>
-              </nav>
-
-              <aside class="left-off-canvas-menu">
-                <ul class="off-canvas-list">
-                  <li><label>User</label></li>
-                  <li><%= link_to 'Sign Out', destroy_user_session_path %></li>
-                  <li><label>Characters</label></li>
-                  <li><%= link_to 'Your Characters', characters_path %></li>
-                  <li><%= link_to 'Add New', new_character_path %></li>
-                  <li><label>Games</label></li>
-                  <li><%= link_to 'Your Games', games_path %></li>
-                  <li><%= link_to 'Add New', new_game_path %></li>
-                  <li><label>Site</label></li>
-                  <li><%= link_to 'Contact Us', contact_us_path %></li>
-                </ul>
-              </aside>
-
-              <div class="small-11 small-centered columns" >
-                <section class="main-section">
-                  <% flash.each do |name, msg| %>
-                    <% if msg.is_a?(String) %>
-                      <div data-alert class="alert-box <%=
-                        if name == :success
-                          "success"
-                        elsif name == :alert
-                          "alert"
-                        else
-                           nil
-                        end %>">
-                        <%= content_tag :div, msg %>
-                        <a href="#" class="close">&times;</a>
-                      </div>
-                    <% end %>
-                  <% end %>
-                  <%= yield %>
-                </section>
               </div>
 
-              <a class="exit-off-canvas"></a>
             </div>
           </div>
 
+        <%- else -%>
+        <div class="row">
+          <div class="small-12 columns">
+            <% flash.each do |name, msg| %>
+              <% if msg.is_a?(String) %>
+                <div data-alert class="alert-box <%=
+                  if name == :success
+                    "success"
+                  elsif name == :alert
+                    "alert"
+                  else
+                     nil
+                  end %>">
+                  <%= content_tag :div, msg %>
+                  <a href="#" class="close">&times;</a>
+                </div>
+              <% end %>
+            <% end %>
+            <%= yield %>
+          </div>
         </div>
-      </div>
+        <%- end -%>
 
-    <%- else -%>
-    <div class="row">
-      <div class="small-12 columns">
-        <% flash.each do |name, msg| %>
-          <% if msg.is_a?(String) %>
-            <div data-alert class="alert-box <%=
-              if name == :success
-                "success"
-              elsif name == :alert
-                "alert"
-              else
-                 nil
-              end %>">
-              <%= content_tag :div, msg %>
-              <a href="#" class="close">&times;</a>
-            </div>
-          <% end %>
-        <% end %>
-        <%= yield %>
-      </div>
-    </div>
-    <%- end -%>
+        <div class="row">
+          <div class="small-4 small-centered columns">
+            <p>Living LARP is &copy; <%= DateTime.now.year %> Eben Lowe</p>
+          </div>
+        </div>
 
-    <div class="row">
-      <div class="small-4 small-centered columns">
-        <p>Living LARP is &copy; <%= DateTime.now.year %> Eben Lowe</p>
-      </div>
-    </div>
+      </div><!-- /st-content -->
 
-
-
-
-
-            </div><!-- /main -->
-          </div><!-- /st-content-inner -->
-        </div><!-- /st-content -->
-      </div><!-- /st-pusher -->
     </div><!-- /st-container -->
 
     <%= javascript_include_tag "application" %>
