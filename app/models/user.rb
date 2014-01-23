@@ -18,4 +18,12 @@ class User < ActiveRecord::Base
     self.frood_on != nil && self.frood_on < DateTime.now
   end
 
+  def has_a_player_in?(game)
+    games = []
+    self.players.each do |player|
+      games << player.game
+    end
+    games.include?(game)
+  end
+
 end
