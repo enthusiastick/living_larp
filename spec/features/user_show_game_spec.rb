@@ -13,14 +13,17 @@ feature "User views a game", %Q{
 
   scenario "not logged in" do
     game = FactoryGirl.create(:game)
+    visit game_path(game)
 
-    expect { visit game_path(game) }.to raise_error(ActionController::RoutingError, "Not Found")
+    expect(page).to have_button('Sign Up')
+    expect(page).to have_button('Sign In')
   end
 
   scenario "logged in, not my game" do
     user = FactoryGirl.create(:user)
     game = FactoryGirl.create(:game)
     login(user)
+    visit game_path(game)
 
     expect(page).to_not have_button('Update')
     expect(page).to_not have_button('Configure')
