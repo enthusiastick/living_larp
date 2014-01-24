@@ -54,10 +54,14 @@ nav {
   font-style: italic;
 }
 
-.usertag {
+a.usertag {
+  color: $tabbar-menu-icon-color;
   font-family: Courier, monospace;
-  padding-top: 0.75em;
   text-size: large;
+}
+
+a.usertag:hover {
+  color: $tabbar-menu-icon-color;
 }
 
 section.left-small a {
