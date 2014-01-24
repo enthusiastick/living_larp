@@ -1,14 +1,39 @@
 <%- if user_signed_in? -%>
   <div class="panel">
     <h5>Welcome.</h5>
-    <p>To get started, click the 'three lines' icon on the leftmost edge of the bar above.</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec et neque tempus, viverra tortor sed, vestibulum metus. Phasellus quam ipsum, convallis sed augue eget, varius accumsan orci. Nulla et lectus lectus. Sed id neque ut eros aliquet aliquet. Sed sed imperdiet purus, at mollis mauris. Maecenas eleifend mauris diam. Aliquam vitae velit in orci accumsan tristique. Cras ornare, neque quis cursus porttitor, augue elit dignissim ligula, pretium vehicula mauris metus eget dolor. Praesent ut est risus.</p>
+    <p>To get started, click the menu icon on the leftmost edge of the bar above.</p>
+    <h6>v0.0.1390600698 Feature Synopsis</h6>
+    <ul>
+      <li>Users can create games</li>
+      <li>Configure game traits (with point costs &c.)
+      <li>Create NPCs</li>
+      <li>Become players (of another user's game or their own) and create Player Characters</li>
+      <li>Transfer points from player to character</li>
+      <li>Game creators can award points to their players</li>
+    </ul>
+    <h6>Features To Be Implemented</h6>
+    <ul>
+      <li>Bulk award points to players</li>
+      <li>Add staff role to users</li>
+      <li>Events</li>
+      <ul>
+        <li>Registration</li>
+        <li>Check-in</li>
+        <li>Report Cards</li>
+      </ul>
+      <li>Downtime traits</li>
+      <ul>
+        <li>Submit</li>
+        <li>Assign</li>
+        <li>Respond/Mark closed</li>
+        <li>Archive</li>
+      </ul>
   </div>
 <%- else %>
   <div class="panel callout radius">
-    <p class="sharp">Handling your games' <span data-tooltip class="has-tip" title="The tiresome but essential details that must be taken care of<br \>&nbsp;and tasks that must be performed in running an organization.">administrivia</span> so that you don't have to.</p>
+    <p class="sharp">Handling your games' <span data-tooltip class="has-tip" title="The tiresome but essential details that must be taken care of and tasks that must be performed in running an organization.">administrivia</span> so that you don't have to.</p>
     <p>Originally coded in January of 2014, <span class="hard">Living LARP</span> was a &quot;breakable toy&quot; project for <a href="http://www.launchacademy.com">Launch Academy</a>. It is intended to be a suite of tools to make LARP management as painless as possible. Our hope is that this will help transition the craft of LARP into the modern, digitized world. Success for this project lies in making games easier to run and more accessible.</p>
-    <p>This app is currently in <a href="https://en.wikipedia.org/wiki/Software_release_life_cycle">pre-alpha</a>, which means that it's not done baking yet. The core functions are not all in place, and you may encounter errors. Please do not save anything business-crucial here, as the database may be wiped periodically prior to alpha release.</p>
+    <p>This app is currently in <a href="https://en.wikipedia.org/wiki/Software_release_life_cycle">alpha</a>, which means that it's not quite ready for primetime. Some core features are up and running, but more will be added prior to beta release. If you have any feedback or suggestions, don't hesitate to <%= link_to 'contact us', new_contact_path %>.</p>
   </div>
   <div class="row">
     <div class="small-4 small-centered columns">

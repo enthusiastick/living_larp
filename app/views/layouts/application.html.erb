@@ -14,7 +14,7 @@
   <body>
     <div class="row">
       <div class="small-12 columns">
-        <h1><%= link_to 'Living LARP', root_path %> <span class="tiny">pre-alpha</span></h1>
+        <h1><%= link_to 'Living LARP', root_path %> <span class="tiny">alpha v0.0.1390600698</span></h1>
       </div>
     </div>
 
@@ -60,7 +60,7 @@
                         elsif name == :alert
                           "alert"
                         else
-                           nil
+                           "info"
                         end %>">
                         <%= content_tag :div, msg %>
                         <a href="#" class="close">&times;</a>
@@ -89,7 +89,7 @@
               elsif name == :alert
                 "alert"
               else
-                 nil
+                 "info"
               end %>">
               <%= content_tag :div, msg %>
               <a href="#" class="close">&times;</a>

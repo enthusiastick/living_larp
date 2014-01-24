@@ -39,14 +39,6 @@ nav {
   color: #990000;
 }
 
-.notice {
-  @include alert;
-}
-
-.alert {
-  @include alert(#c60f13);
-}
-
 .hard {
   font-weight: bold;
 }
