@@ -13,5 +13,11 @@
       <%= f.association :child_trait, collection: @game.game_traits %>
       <%= f.button :submit, 'Set Prerequisite' %>
     <% end %>
+
+    <div class="panel">
+      <h4><i class="fi-lightbulb"></i> Impossible loops</h4>
+      <p>At the moment, it's possible to create prerequisite loops, or even set a trait as its own prerequisite. This will be fixed in a future release, but in the mean time, have no fear: you can always remove a prerequisite by clicking the <i class="fi-x"></i> icon next to it on the <%= link_to 'manage traits', new_game_game_trait_path(@game) %> page.</p>
+    </div>
+
   <%- end -%>
 <%- end -%>

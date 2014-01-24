@@ -24,5 +24,10 @@
       <%= submit_tag "Add Player", class: "button" %>
     <% end %>
 
+    <div class="panel">
+      <h4><i class="fi-lightbulb"></i> Invite players to join your game</h4>
+      <p>You don't have to manually add players. Just ask them to sign up for the site and then, once they're logged in, direct them to <span class="label secondary"><%= link_to 'this link', game_path(@game) %></span>. Don't worry, they won't see any of your fancy administration options.</p>
+    </div>
+
   <%- end -%>
 <%- end -%>

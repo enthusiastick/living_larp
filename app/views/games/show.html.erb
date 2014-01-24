@@ -18,6 +18,11 @@
     <li><%= button_to 'View Characters', '/games/player_characters/' + @game.id.to_s, method: :get, class: 'button small' %></li>
     <li><%= button_to 'Manage Players', game_players_path(@game), method: :get, class: 'button small' %></li>
   </ul>
+
+    <div class="panel">
+      <h4><i class="fi-lightbulb"></i> Why you should set a description</h4>
+      <p>Your game's description will be displayed on its Living LARP portal page (currently located at this same URL), which will serve as the point of entry for site visitors and prospective players.</p>
+    </div>
 <%- else -%>
   <p><%= @game.description %></p>
 
