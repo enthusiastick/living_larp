@@ -4,7 +4,7 @@
     <li class="current"><%= link_to @game.name, game_path(@game) %></li>
   </ul>
 <%- end -%>
-<h2><%= @game.name %></h2>
+<h2><i class="fi-folder"></i> <%= @game.name %></h2>
 <p>Starting Points: <%= @game.starting_points %></p>
 
 <%- if current_user == @game.user -%>

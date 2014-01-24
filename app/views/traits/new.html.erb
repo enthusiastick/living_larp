@@ -5,7 +5,7 @@
       <li><%= link_to @character.name, character_path(@character) %></li>
       <li class="current"><%= link_to 'Update Character', new_character_trait_path(@character) %></li>
     </ul>
-    <h2><%= @character.name %></h2>
+    <h2><i class="fi-torso"></i> <%= @character.name %></h2>
     <p>Available Points: <%= @character.available_points %></p>
     <%- unless @character.traits == [] -%>
       <table>

@@ -5,7 +5,7 @@
       <li><%= link_to @game.name, game_path(@game) %></li>
       <li class="current"><%= link_to 'Configure Traits', new_game_game_trait_path(@game) %></li>
     </ul>
-    <h2><%= @game.name %></h2>
+    <h2><i class="fi-folder"></i> <%= @game.name %></h2>
     <p>Starting Points: <%= @game.starting_points %></p>
     <%- unless @game_traits == [] -%>
       <table width=100%>

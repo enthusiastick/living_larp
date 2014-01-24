@@ -26,7 +26,7 @@
   </ul>
   <%- end -%>
 
-  <h2><%= @character.name %></h2>
+  <h2><i class="fi-torso"></i> <%= @character.name %></h2>
   <%- unless Character.find(params[:id]).game.user == current_user %>
     <%- unless @character.player == nil -%>
       <p>My Available Points: <%= @character.player.points%></p>

@@ -7,7 +7,8 @@
     </ul>
 
     <%- unless @players == nil %>
-      <h3><%= @game.name %> Players:</h3>
+      <h2><i class="fi-folder"></i> <%= @game.name %></h2>
+      <h3>Players:</h3>
       <table width=100%>
         <tbody>
           <% @players.each do |player| %>

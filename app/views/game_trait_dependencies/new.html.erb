@@ -6,6 +6,8 @@
       <li class="current"><%= link_to 'Set Prerequisite', new_game_game_trait_dependency_path(@game) %></li>
     </ul>
 
+    <h2><i class="fi-folder"></i> <%= @game.name %></h2>
+
     <%= simple_form_for [@game, @game_trait_dependency] do |f| %>
       <%= f.association :parent_trait, collection: @game.game_traits %>
       <%= f.association :child_trait, collection: @game.game_traits %>
