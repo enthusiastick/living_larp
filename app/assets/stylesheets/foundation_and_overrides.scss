@@ -1,3 +1,4 @@
+$header-font-family: Verdana;
 //
 // FOUNDATION SETTINGS
 //
@@ -22,7 +23,7 @@
 // $rem-base: 16px;
 
 // We use this to control whether or not CSS classes come through in the gem files.
-// $include-html-classes: true;
+$include-html-classes: true;
 // $include-print-styles: true;
 // $include-html-global-classes: $include-html-classes;
 
@@ -37,7 +38,7 @@
 // We use these to control various global styles
 // $body-bg: #fff;
 // $body-font-color: #222;
-// $body-font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+$body-font-family: Georgia;
 // $body-font-weight: normal;
 // $body-font-style: normal;
 
