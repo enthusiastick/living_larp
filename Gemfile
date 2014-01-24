@@ -39,6 +39,7 @@ gem 'foundation-rails'
 gem 'fastclick-rails'
 gem 'rails_admin'
 gem 'cancan'
+gem 'foundation-icons-sass-rails'
 
 group :test, :development do
   gem 'rspec-rails'
