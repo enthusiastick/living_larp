@@ -68,3 +68,8 @@ section.left-small a {
   color: $tabbar-menu-icon-color;
   font-size: large;
 }
+
+.left-off-canvas-toggle {
+  @include button($button-tny);
+  font-size: xx-large;
+}
